@@ -191,9 +191,9 @@ lib/
 | メソッド / パス | 役割 |
 |---|---|
 | `POST /api/scenes/generate` | `works.style` を前置したプロンプトで gpt-image-1 を呼び出し、画像を `scenes` バケットへ保存して public URL を `scenes.image_url` に格納 |
-| `POST /api/chat` ※予定 | 作品・全シーン文脈付きで Claude を呼び出し、会話を `chat_messages` に保存 |
-| `POST /api/submissions` ※予定 | 感想文を保存後、Claude で要約＋採点（JSON）を生成して格納 |
-| `GET /api/works/[id]/submissions` ※予定 | 先生用の提出一覧取得 |
+| `POST /api/chat` | 作品・全シーン文脈付きで Claude を呼び出し、会話を `chat_messages` に保存 |
+| `POST /api/submissions` | 感想文を保存後、Claude で要約＋採点（JSON）を生成して格納 |
+| `GET /api/works/[id]/submissions` | 先生用の提出一覧取得 |
 
 ### 画像生成の仕様
 
@@ -211,11 +211,13 @@ SPEC.md の実装順に沿って進めています。
 - [x] 1. Next.js雛形 + モードトグル + Supabaseクライアント + 作品一覧
 - [x] 2. 先生: 作品作成 → シーン追加（テキスト）
 - [x] 3. `/api/scenes/generate` 画像生成（**疎通確認済み**）
-- [ ] 4. 生徒: 紙芝居ビューア + シーンメモ
-- [ ] 5. `/api/chat`（シーン文脈付きディスカッション）
-- [ ] 6. 感想文提出 → 要約+採点表示
-- [ ] 7. 先生: 提出一覧タブ
-- [ ] 8. シーン並び替え
+- [x] 4. 生徒: 紙芝居ビューア + シーンメモ
+- [x] 5. `/api/chat`（シーン文脈付きディスカッション）
+- [x] 6. 感想文提出 → 要約+採点表示
+- [x] 7. 先生: 提出一覧タブ
+- [x] 8. シーン並び替え（↑↓ボタン）
+
+**全ステップ実装完了。`npm run build` も成功。**
 
 ---
 
