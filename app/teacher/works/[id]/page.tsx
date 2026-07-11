@@ -18,6 +18,10 @@ export default function TeacherWork({
   const [generating, setGenerating] = useState<string | null>(null);
   const [reordering, setReordering] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [editingSceneId, setEditingSceneId] = useState<string | null>(null);
+  const [editPromptText, setEditPromptText] = useState("");
+  const [editDialogue, setEditDialogue] = useState("");
+  const [savingEdit, setSavingEdit] = useState<string | null>(null);
   const [tab, setTab] = useState<"scenes" | "submissions">("scenes");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loadingSubs, setLoadingSubs] = useState(false);
@@ -117,6 +121,32 @@ export default function TeacherWork({
       alert("シーンの削除に失敗しました");
       return;
     }
+    await load();
+  };
+
+  const startEditingScene = (scene: Scene) => {
+    setEditingSceneId(scene.id);
+    setEditPromptText(scene.prompt_text ?? "");
+    setEditDialogue(scene.dialogue ?? "");
+  };
+
+  const cancelEdit = () => {
+    setEditingSceneId(null);
+  };
+
+  const saveSceneEdit = async (scene: Scene) => {
+    setSavingEdit(scene.id);
+    const { error } = await supabase
+      .from("scenes")
+      .update({ prompt_text: editPromptText, dialogue: editDialogue })
+      .eq("id", scene.id);
+    setSavingEdit(null);
+    if (error) {
+      console.error(error);
+      alert("シーンの更新に失敗しました");
+      return;
+    }
+    setEditingSceneId(null);
     await load();
   };
 
@@ -258,6 +288,13 @@ export default function TeacherWork({
                     ↓
                   </button>
                   <button
+                    onClick={() => startEditingScene(s)}
+                    className="w-9 h-9 grid place-items-center bg-slate-100 hover:bg-slate-200 rounded-lg text-lg font-bold transition active:scale-90"
+                    aria-label="編集"
+                  >
+                    ✎
+                  </button>
+                  <button
                     onClick={() => deleteScene(s)}
                     disabled={deleting === s.id}
                     className="w-9 h-9 grid place-items-center bg-red-100 hover:bg-red-200 text-red-600 rounded-lg text-lg font-bold transition active:scale-90 disabled:opacity-30"
@@ -267,7 +304,44 @@ export default function TeacherWork({
                   </button>
                 </div>
               </div>
-              {s.image_url ? (
+              {editingSceneId === s.id ? (
+                <div className="mt-3 space-y-3">
+                  <label className="grid gap-1.5">
+                    <span className="text-sm text-slate-400 font-bold">絵の説明</span>
+                    <textarea
+                      value={editPromptText}
+                      onChange={(e) => setEditPromptText(e.target.value)}
+                      className="input"
+                      rows={2}
+                    />
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm text-slate-400 font-bold">セリフ</span>
+                    <textarea
+                      value={editDialogue}
+                      onChange={(e) => setEditDialogue(e.target.value)}
+                      className="input"
+                      rows={2}
+                    />
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => saveSceneEdit(s)}
+                      disabled={savingEdit === s.id}
+                      className="btn-primary px-4 py-2"
+                    >
+                      {savingEdit === s.id ? "保存中…" : "保存する"}
+                    </button>
+                    <button
+                      onClick={cancelEdit}
+                      type="button"
+                      className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    >
+                      キャンセル
+                    </button>
+                  </div>
+                </div>
+              ) : s.image_url ? (
                 <img
                   src={s.image_url}
                   alt=""
