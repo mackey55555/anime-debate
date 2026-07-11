@@ -4,7 +4,7 @@ import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useMode } from "@/components/ModeContext";
-import type { Work } from "@/lib/types";
+import type { Work, Submission } from "@/lib/types";
 
 type Result = { summary: string; score: number | null; comment: string };
 
@@ -19,6 +19,9 @@ export default function SubmitPage({
   const [essay, setEssay] = useState("");
   const [sending, setSending] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [showComments, setShowComments] = useState(false);
+  const [loadingComments, setLoadingComments] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -28,6 +31,25 @@ export default function SubmitPage({
         .eq("id", id)
         .single();
       setWork(data);
+    })();
+  }, [id]);
+
+  useEffect(() => {
+    if (!id) return;
+    (async () => {
+      setLoadingComments(true);
+      const { data, error } = await supabase
+        .from("submissions")
+        .select("*")
+        .eq("work_id", id)
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("コメント取得エラー:", error.message, error);
+        setSubmissions([]);
+      } else {
+        setSubmissions((data as Submission[]) ?? []);
+      }
+      setLoadingComments(false);
     })();
   }, [id]);
 
@@ -108,15 +130,67 @@ export default function SubmitPage({
 
   return (
     <div>
-      <h1 className="text-3xl font-black tracking-tight">
-        📝 かんそうぶんを かく
-      </h1>
-      {work && (
-        <p className="text-slate-500 mt-1 font-bold">「{work.title}」</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-black tracking-tight">
+            📝 かんそうぶんを かく
+          </h1>
+          {work && (
+            <p className="text-slate-500 mt-1 font-bold">「{work.title}」</p>
+          )}
+          <p className="text-slate-500 mt-2">
+            すきなシーンや、かんがえたこと、かんじたことを かいてみよう。
+          </p>
+        </div>
+        <button
+          onClick={() => setShowComments((v) => !v)}
+          className="btn-ghost px-4 py-3 text-base shrink-0"
+        >
+          {showComments ? "コメントを閉じる" : "ほかの人のコメント"}
+        </button>
+      </div>
+
+      {showComments && (
+        <div className="card p-4 mt-4">
+          <h2 className="font-bold text-slate-700 mb-3">🌈 ほかの生徒のコメント</h2>
+          {loadingComments ? (
+            <p className="text-slate-500">よみこみ中…</p>
+          ) : submissions.length === 0 ? (
+            <p className="text-slate-500">まだコメントはありません。</p>
+          ) : (
+            <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
+              {submissions.map((submission) => (
+                <div
+                  key={submission.id}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-3"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-bold text-slate-700">
+                      🎒 {submission.student_name}
+                    </p>
+                    {submission.ai_score != null && (
+                      <span className="text-sm font-bold text-amber-600">
+                        🌟 {submission.ai_score}/5
+                      </span>
+                    )}
+                  </div>
+                  {submission.ai_comment && (
+                    <p className="mt-2 text-slate-600 leading-relaxed">
+                      {submission.ai_comment}
+                    </p>
+                  )}
+                  {submission.essay && (
+                    <p className="mt-2 text-slate-700 leading-relaxed whitespace-pre-wrap">
+                      {submission.essay}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       )}
-      <p className="text-slate-500 mt-2">
-        すきなシーンや、かんがえたこと、かんじたことを かいてみよう。
-      </p>
+
       <textarea
         value={essay}
         onChange={(e) => setEssay(e.target.value)}

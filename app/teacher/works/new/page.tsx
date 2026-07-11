@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 
 export default function NewWork() {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [style, setStyle] = useState("やわらかい水彩画のアニメ風");
@@ -15,18 +12,8 @@ export default function NewWork() {
     e.preventDefault();
     if (!title.trim()) return;
     setSaving(true);
-    const { data, error } = await supabase
-      .from("works")
-      .insert({ title, description, style })
-      .select()
-      .single();
     setSaving(false);
-    if (error || !data) {
-      console.error("作品保存エラー:", error?.message, error);
-      alert("保存に失敗しました: " + (error?.message ?? ""));
-      return;
-    }
-    router.push(`/teacher/works/${data.id}`);
+    alert("作品の保存はこのデモでは未実装です");
   };
 
   return (
