@@ -1,0 +1,340 @@
+/* =========================================================
+   アニメ考察ひろば — プレゼンテーマ（夏休み × アニメ）
+   reveal.css の上に重ねるカスタムテーマ
+   ========================================================= */
+
+:root {
+  --c-sky-top: #7ec8ff;
+  --c-sky-bot: #ffd9a0;
+  --c-ink: #1f2340;
+  --c-pop: #ff5da2;
+  --c-pop2: #ffb700;
+  --c-aqua: #24d3c4;
+  --c-violet: #7c5cff;
+  --font-pop: "Mochiy Pop One", "Zen Maru Gothic", sans-serif;
+  --font-body: "Zen Maru Gothic", "RocknRoll One", sans-serif;
+  --font-hand: "Yusei Magic", "Zen Maru Gothic", sans-serif;
+}
+
+/* ---------- 背景（アニメ空 → 夕やけのグラデが動く） ---------- */
+html {
+  background: #0b1030;
+}
+.reveal {
+  font-family: var(--font-body);
+  color: var(--c-ink);
+  font-weight: 500;
+}
+.reveal .slides {
+  text-align: left;
+}
+
+/* 空のアニメーション背景（全スライド共通） */
+.sky-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, var(--c-sky-top) 0%, #bfe6ff 45%, var(--c-sky-bot) 100%);
+  background-size: 100% 200%;
+  animation: skyshift 18s ease-in-out infinite alternate;
+  overflow: hidden;
+}
+@keyframes skyshift {
+  0% { background-position: 0 0%; }
+  100% { background-position: 0 60%; }
+}
+
+/* 太陽（回るレイ） */
+.sky-bg .sun {
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #fff6c0, #ffd54a 60%, #ff9e2c);
+  box-shadow: 0 0 60px 20px rgba(255, 200, 60, 0.6);
+  animation: sunpulse 4s ease-in-out infinite;
+}
+.sky-bg .sun::before {
+  content: "";
+  position: absolute;
+  inset: -34px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 8deg, rgba(255, 214, 74, 0.55) 8deg 14deg, transparent 14deg 30deg
+  );
+  animation: spin 26s linear infinite;
+}
+@keyframes sunpulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 入道雲 */
+.cloud {
+  position: absolute;
+  font-size: 90px;
+  filter: drop-shadow(0 8px 0 rgba(255,255,255,0.5));
+  opacity: 0.95;
+  animation: drift linear infinite;
+}
+.cloud.c1 { top: 14%; left: -15%; animation-duration: 46s; }
+.cloud.c2 { top: 30%; left: -25%; font-size: 64px; animation-duration: 64s; animation-delay: -12s; }
+.cloud.c3 { top: 8%;  left: -35%; font-size: 120px; animation-duration: 80s; animation-delay: -30s; opacity: .8;}
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(160vw); } }
+
+/* ふわふわ漂う夏アイテム */
+.floaty {
+  position: absolute;
+  bottom: -60px;
+  font-size: 42px;
+  animation: rise linear infinite;
+  opacity: .9;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,.15));
+}
+@keyframes rise {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: .95; }
+  90%  { opacity: .95; }
+  100% { transform: translateY(-118vh) rotate(320deg); opacity: 0; }
+}
+
+/* キラキラ */
+.sparkle {
+  position: absolute;
+  color: #fff;
+  font-size: 22px;
+  animation: twinkle 2.6s ease-in-out infinite;
+  text-shadow: 0 0 10px #fff;
+}
+@keyframes twinkle {
+  0%,100% { opacity: .2; transform: scale(.7); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+/* ---------- スライド本体（すりガラスのカード） ---------- */
+.reveal .slides section {
+  padding: 8px 4px;
+}
+.panel {
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(6px);
+  border-radius: 28px;
+  padding: 40px 52px;
+  box-shadow: 0 20px 60px rgba(31, 35, 64, 0.25), inset 0 0 0 3px rgba(255,255,255,.6);
+  border: 3px solid rgba(255,255,255,.8);
+}
+
+/* ---------- 見出し ---------- */
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font-pop);
+  color: var(--c-ink);
+  line-height: 1.2;
+  letter-spacing: .01em;
+  text-transform: none;
+}
+.reveal h1 {
+  font-size: 2.7em;
+  background: linear-gradient(120deg, var(--c-pop), var(--c-pop2) 55%, var(--c-aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(3px 4px 0 rgba(255,255,255,.9)) drop-shadow(4px 6px 0 rgba(124,92,255,.35));
+}
+.reveal h2 {
+  font-size: 1.9em;
+  color: var(--c-violet);
+  text-shadow: 2px 3px 0 #fff, 4px 5px 0 rgba(124,92,255,.18);
+}
+.reveal h3 { font-size: 1.3em; color: var(--c-ink); }
+
+/* ラベル（章番号など） */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-pop);
+  font-size: .7em;
+  color: #fff;
+  background: linear-gradient(120deg, var(--c-pop), var(--c-violet));
+  padding: 6px 18px;
+  border-radius: 999px;
+  box-shadow: 0 6px 0 rgba(124,92,255,.35);
+  margin-bottom: 18px;
+  transform: rotate(-2deg);
+}
+
+/* リスト */
+.reveal .slides ul { list-style: none; margin-left: 0; }
+.reveal .slides ul li {
+  position: relative;
+  padding: 8px 0 8px 44px;
+  font-size: 1.05em;
+}
+.reveal .slides ul li::before {
+  content: "🌻";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  font-size: 1.05em;
+}
+.reveal .slides ul.sea li::before { content: "🌊"; }
+.reveal .slides ul.star li::before { content: "⭐"; }
+.reveal .slides ul.check li::before { content: "✅"; }
+
+/* 強調 */
+.reveal strong { color: var(--c-pop); font-weight: 700; }
+.hl {
+  background: linear-gradient(transparent 62%, #ffe27a 62%);
+  padding: 0 .1em;
+  font-weight: 700;
+}
+
+/* ---------- タイトルスライド ---------- */
+.title-hero { text-align: center; }
+.title-hero .kicker {
+  font-family: var(--font-hand);
+  font-size: 1.2em;
+  color: var(--c-violet);
+  margin-bottom: 6px;
+}
+.title-hero .maintitle {
+  font-family: var(--font-pop);
+  font-size: 3.4em;
+  line-height: 1.1;
+  background: linear-gradient(120deg, #ff5da2, #ffb700 50%, #24d3c4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(4px 5px 0 #fff) drop-shadow(6px 8px 0 rgba(124,92,255,.35));
+  animation: pop-in .9s cubic-bezier(.2,1.4,.4,1) both, bob 3.6s ease-in-out 1s infinite;
+}
+@keyframes pop-in { from { transform: scale(.5) rotate(-6deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* 集中線（アニメっぽい） */
+.speedlines {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(255,255,255,0) 0deg 3deg,
+    rgba(255,255,255,.45) 3deg 4deg
+  );
+  mask: radial-gradient(circle at 50% 50%, transparent 26%, #000 55%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 26%, #000 55%);
+  animation: spin 40s linear infinite;
+  opacity: .5;
+}
+
+/* ---------- 画像プレースホルダ ---------- */
+.imgslot {
+  border: 4px dashed var(--c-violet);
+  border-radius: 22px;
+  background:
+    repeating-linear-gradient(45deg, rgba(124,92,255,.06) 0 12px, rgba(124,92,255,.12) 12px 24px);
+  color: var(--c-violet);
+  font-family: var(--font-pop);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 320px;
+  padding: 20px;
+  gap: 6px;
+}
+.imgslot small { font-family: var(--font-body); color: #6b6f92; font-weight: 500; }
+.imgslot.wide { min-height: 260px; }
+
+/* 差し替えメモ */
+.todo {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: .5em;
+  color: #b23a6b;
+  background: #ffe3ef;
+  border: 2px dashed #ff9dc4;
+  border-radius: 12px;
+  padding: 4px 12px;
+  margin-top: 10px;
+}
+
+/* ---------- 2カラム ---------- */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.cols.tight { gap: 18px; }
+
+/* 役割カード */
+.rolecard {
+  border-radius: 24px;
+  padding: 26px 28px;
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(0,0,0,.18);
+}
+.rolecard.teacher { background: linear-gradient(135deg, #7c5cff, #b06bff); }
+.rolecard.student { background: linear-gradient(135deg, #ff8a3d, #ff5da2); }
+.rolecard h3 { color: #fff; font-size: 1.5em; }
+.rolecard ul li { color: #fff; }
+.rolecard ul li::before { content: "✨"; }
+
+/* フロー（横並びステップ） */
+.flow { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.flow .step {
+  flex: 1 1 0;
+  min-width: 130px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  border-bottom: 6px solid var(--c-aqua);
+}
+.flow .step .n {
+  font-family: var(--font-pop);
+  color: #fff;
+  background: linear-gradient(120deg, var(--c-pop), var(--c-violet));
+  width: 40px; height: 40px; line-height: 40px; border-radius: 50%;
+  margin: 0 auto 8px;
+}
+.flow .arrow { align-self: center; font-size: 1.6em; color: var(--c-violet); }
+
+/* 技術スタックのバッジ */
+.stack { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip {
+  font-family: var(--font-pop);
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 20px;
+  box-shadow: 0 8px 0 rgba(124,92,255,.25);
+  border: 2px solid rgba(124,92,255,.25);
+}
+.chip.pink { box-shadow: 0 8px 0 rgba(255,93,162,.3); border-color: rgba(255,93,162,.3); }
+.chip.aqua { box-shadow: 0 8px 0 rgba(36,211,196,.3); border-color: rgba(36,211,196,.3); }
+
+/* デモスライド */
+.demo-badge {
+  font-family: var(--font-pop);
+  font-size: 1.1em;
+  color: #fff;
+  background: linear-gradient(120deg, var(--c-pop), var(--c-pop2));
+  padding: 10px 26px;
+  border-radius: 999px;
+  box-shadow: 0 10px 0 rgba(255,93,162,.35);
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+/* フラグメントの登場を少し弾ませる */
+.reveal .slides section .fragment.pop {
+  transform: scale(.85);
+  transition: all .35s cubic-bezier(.2,1.5,.4,1);
+}
+.reveal .slides section .fragment.pop.visible { transform: scale(1); }
+
+/* プログレス/コントロールの色 */
+.reveal .progress { color: var(--c-pop); height: 6px; }
+.reveal .controls { color: var(--c-violet); }
+.reveal .slide-number { background: rgba(124,92,255,.75); }
+
+/* ちいさな注記 */
+.note { font-family: var(--font-body); color: #6b6f92; font-size: .8em; }
+
+/* 画面いっぱいの区切りスライド */
+.divider { text-align: center; }
+.divider .big { font-family: var(--font-pop); font-size: 3em; }

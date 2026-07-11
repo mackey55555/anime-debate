@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>アニメ考察ひろば — プレゼン</title>
+
+  <!-- Google Fonts（ポップ／アニメっぽい日本語フォント） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@500;700;900&family=RocknRoll+One&display=swap" rel="stylesheet" />
+
+  <!-- reveal.js 本体（CDN） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <!-- カスタム夏×アニメテーマ -->
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+  <!-- ===== 動く夏空の背景（全スライド共通） ===== -->
+  <div class="sky-bg" aria-hidden="true">
+    <div class="sun"></div>
+    <div class="cloud c1">☁️</div>
+    <div class="cloud c2">☁️</div>
+    <div class="cloud c3">☁️</div>
+    <!-- ふわふわ漂う夏アイテム -->
+    <div class="floaty" style="left:8%;  animation-duration:16s; animation-delay:-2s;">🍉</div>
+    <div class="floaty" style="left:20%; animation-duration:22s; animation-delay:-8s;">🌻</div>
+    <div class="floaty" style="left:34%; animation-duration:19s; animation-delay:-5s;">🍧</div>
+    <div class="floaty" style="left:52%; animation-duration:24s; animation-delay:-11s;">🏖️</div>
+    <div class="floaty" style="left:66%; animation-duration:17s; animation-delay:-3s;">🎐</div>
+    <div class="floaty" style="left:78%; animation-duration:21s; animation-delay:-14s;">📖</div>
+    <div class="floaty" style="left:90%; animation-duration:20s; animation-delay:-7s;">🐟</div>
+    <!-- キラキラ -->
+    <div class="sparkle" style="top:22%; left:18%;">✦</div>
+    <div class="sparkle" style="top:40%; left:70%; animation-delay:.6s;">✦</div>
+    <div class="sparkle" style="top:66%; left:30%; animation-delay:1.2s;">✧</div>
+    <div class="sparkle" style="top:16%; left:54%; animation-delay:1.8s;">✧</div>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ===================================================== -->
+      <!-- 1. タイトル -->
+      <!-- ===================================================== -->
+      <section data-auto-animate>
+        <div class="title-hero">
+          <div class="speedlines"></div>
+          <div class="kicker fragment fade-in">🌞 夏休みの自由研究に、あたらしいカタチ 🌞</div>
+          <div class="maintitle">アニメ考察<br />ひろば</div>
+          <p class="fragment fade-up" style="font-size:1.2em; margin-top:24px;">
+            読書感想文を「<span class="hl">アニメ考察</span>」に置きかえる教育アプリ
+          </p>
+          <p class="fragment fade-up note" style="margin-top:18px;">
+            〔 チーム名 / 発表者 をここに 〕 <span class="todo">差し替え</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 2. コンセプト -->
+      <!-- ===================================================== -->
+      <section data-transition="zoom">
+        <div class="panel">
+          <span class="eyebrow">CONCEPT ／ コンセプト</span>
+          <h2>「観る」を「考える」に。</h2>
+          <div class="cols" style="margin-top:18px;">
+            <div>
+              <ul class="star">
+                <li class="fragment fade-up">〔 コンセプト文① 〕</li>
+                <li class="fragment fade-up">〔 コンセプト文② 〕</li>
+                <li class="fragment fade-up">〔 コンセプト文③ 〕</li>
+              </ul>
+              <p class="todo">キャッチコピー・想いをここに差し替え</p>
+            </div>
+            <div class="imgslot fragment zoom-in">
+              🎨<br />コンセプトを表す夏の絵
+              <small>（例：麦わら帽子の子がタブレットでアニメを観る水彩画）</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 3. 課題（ストーリー仕立て：数枚に分割） -->
+      <!-- ===================================================== -->
+      <section data-transition="convex">
+        <div class="divider">
+          <span class="eyebrow">STORY ／ ある夏の日</span>
+          <p class="big fragment pop">「かんそうぶん、<br />かけないよ…」</p>
+          <p class="fragment fade-up note">〔 主人公の小学生の“つまずき”を一言で 〕 <span class="todo">差し替え</span></p>
+        </div>
+      </section>
+
+      <section>
+        <div class="panel">
+          <span class="eyebrow">PROBLEM ／ 課題①</span>
+          <h2>本が苦手だと、感想の入口で止まる</h2>
+          <div class="cols tight" style="margin-top:16px;">
+            <ul>
+              <li class="fragment fade-up">〔 課題の背景データ・実感 〕</li>
+              <li class="fragment fade-up">〔 「何を書けばいいか分からない」問題 〕</li>
+            </ul>
+            <div class="imgslot wide fragment fade-in">😢<br />困っている子のイラスト<small>（夏休みの宿題×感想文）</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="panel">
+          <span class="eyebrow">PROBLEM ／ 課題②</span>
+          <h2>でも “好きなアニメ” なら語れる</h2>
+          <ul class="check" style="margin-top:12px;">
+            <li class="fragment fade-up">〔 子どもが夢中になれる題材＝アニメ・映像 〕</li>
+            <li class="fragment fade-up">〔 「考える」を引き出す仕掛けが足りていない 〕</li>
+            <li class="fragment fade-up"><span class="hl">→ そこで「アニメ考察ひろば」</span></li>
+          </ul>
+          <p class="todo">課題は必要に応じて枚数を増減してOK</p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 4. 機能：先生 / 生徒 -->
+      <!-- ===================================================== -->
+      <section data-transition="slide">
+        <div class="panel">
+          <span class="eyebrow">FEATURES ／ できること</span>
+          <h2>先生と生徒、それぞれの役割</h2>
+          <div class="cols" style="margin-top:18px;">
+            <div class="rolecard teacher fragment fade-right">
+              <h3>👨‍🏫 先生</h3>
+              <ul>
+                <li>作品（紙芝居アニメ）をつくる</li>
+                <li>シーンのセリフ＋<strong>AI画像生成</strong></li>
+                <li>シーンの並び替え・編集</li>
+                <li>提出を<strong>AI要約＋採点</strong>で確認</li>
+              </ul>
+            </div>
+            <div class="rolecard student fragment fade-left">
+              <h3>🎒 生徒</h3>
+              <ul>
+                <li>紙芝居アニメを1枚ずつ視聴</li>
+                <li>シーンごとに<strong>考察メモ</strong></li>
+                <li><strong>AIと対話</strong>して考えを深める</li>
+                <li>感想文を提出 → その場でフィードバック</li>
+              </ul>
+            </div>
+          </div>
+          <p class="todo">文言・アイコンは実機能に合わせて微調整</p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 5. ユーザーフロー -->
+      <!-- ===================================================== -->
+      <section>
+        <div class="panel">
+          <span class="eyebrow">USER FLOW ／ 体験の流れ</span>
+          <h2>作る → 観る → 考える → 書く</h2>
+          <div class="flow" style="margin-top:22px;">
+            <div class="step fragment fade-up"><div class="n">1</div>先生が<br>作品を作成</div>
+            <div class="arrow fragment fade-in">→</div>
+            <div class="step fragment fade-up"><div class="n">2</div>AIでシーン<br>画像を生成</div>
+            <div class="arrow fragment fade-in">→</div>
+            <div class="step fragment fade-up"><div class="n">3</div>生徒が<br>紙芝居を視聴</div>
+            <div class="arrow fragment fade-in">→</div>
+            <div class="step fragment fade-up"><div class="n">4</div>メモ＋<br>AIチャット</div>
+            <div class="arrow fragment fade-in">→</div>
+            <div class="step fragment fade-up"><div class="n">5</div>感想文提出<br>→ 採点</div>
+          </div>
+          <p class="note" style="margin-top:20px;">〔 各ステップの補足を話す 〕 <span class="todo">差し替え可</span></p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 6. 主要画面（スクショ差し込み枠） -->
+      <!-- ===================================================== -->
+      <section>
+        <div class="panel">
+          <span class="eyebrow">SCREENS ／ 主要画面</span>
+          <h2>実際の画面</h2>
+          <div class="cols tight" style="margin-top:14px;">
+            <div class="imgslot fragment zoom-in">🖥️<br>作品一覧 / 先生の作成画面<small>スクショを差し替え</small></div>
+            <div class="imgslot fragment zoom-in">📱<br>生徒の紙芝居ビューア<small>スクショを差し替え</small></div>
+          </div>
+          <div class="cols tight" style="margin-top:14px;">
+            <div class="imgslot fragment zoom-in">🤖<br>AIチャット画面<small>スクショを差し替え</small></div>
+            <div class="imgslot fragment zoom-in">📝<br>感想文の採点結果<small>スクショを差し替え</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 7. ★ ライブデモ枠 ★ -->
+      <!-- ===================================================== -->
+      <section data-transition="zoom" data-background-color="#101538">
+        <div class="divider">
+          <div class="speedlines"></div>
+          <span class="demo-badge">🎬 ここで実演！ LIVE DEMO</span>
+          <p style="color:#fff; font-size:1.4em; margin-top:28px; font-family:var(--font-pop);">
+            アプリを動かしてみます
+          </p>
+          <ul class="star" style="display:inline-block; text-align:left; color:#fff; margin-top:10px;">
+            <li style="color:#fff;">先生モードで作品づくり → 🎨画像生成</li>
+            <li style="color:#fff;">生徒モードで視聴 → メモ → チャット → 提出</li>
+          </ul>
+          <p class="note" style="color:#c9cdf5; margin-top:18px;">
+            デモURL: <strong style="color:#fff;">http://localhost:3000</strong>
+            <span class="todo">当日の環境に差し替え</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 8. 技術構成 -->
+      <!-- ===================================================== -->
+      <section>
+        <div class="panel">
+          <span class="eyebrow">TECH ／ 技術構成</span>
+          <h2>作ったもの</h2>
+          <div class="stack" style="margin-top:18px;">
+            <span class="chip fragment pop">Next.js (App Router)</span>
+            <span class="chip fragment pop">TypeScript</span>
+            <span class="chip aqua fragment pop">Tailwind CSS</span>
+            <span class="chip aqua fragment pop">Supabase / Postgres・Storage</span>
+            <span class="chip pink fragment pop">Claude (考察・採点)</span>
+            <span class="chip pink fragment pop">OpenAI gpt-image-1 (画像生成)</span>
+          </div>
+          <div class="cols" style="margin-top:24px;">
+            <ul>
+              <li class="fragment fade-up">AIキー処理は<strong>サーバーAPIに隔離</strong></li>
+              <li class="fragment fade-up">画像は生成→Storage→URLをDB保存</li>
+            </ul>
+            <div class="imgslot wide fragment fade-in">🗺️<br>アーキ図をここに<small>（構成図を差し替え）</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 9. 今後の拡張案 -->
+      <!-- ===================================================== -->
+      <section data-transition="convex">
+        <div class="panel">
+          <span class="eyebrow">NEXT ／ 今後の拡張案</span>
+          <h2>ここから広がる 🚀</h2>
+          <div class="cols tight" style="margin-top:16px;">
+            <ul class="sea">
+              <li class="fragment fade-up">〔 拡張アイデア① 〕</li>
+              <li class="fragment fade-up">〔 拡張アイデア② 〕</li>
+              <li class="fragment fade-up">〔 拡張アイデア③ 〕</li>
+            </ul>
+            <ul class="sea">
+              <li class="fragment fade-up">〔 拡張アイデア④ 〕</li>
+              <li class="fragment fade-up">〔 拡張アイデア⑤ 〕</li>
+              <li class="fragment fade-up">〔 マネタイズ／展開先 〕</li>
+            </ul>
+          </div>
+          <p class="todo">箇条書きを実際のアイデアに差し替え</p>
+        </div>
+      </section>
+
+      <!-- ===================================================== -->
+      <!-- 10. クロージング -->
+      <!-- ===================================================== -->
+      <section data-transition="zoom">
+        <div class="title-hero">
+          <div class="speedlines"></div>
+          <div class="maintitle" style="font-size:2.6em;">ありがとう<br>ございました！</div>
+          <p class="fragment fade-up" style="font-size:1.2em; margin-top:20px;">
+            🌻 この夏、子どもたちに「考えるたのしさ」を 🌻
+          </p>
+          <p class="fragment fade-up note" style="margin-top:16px;">
+            〔 連絡先 / GitHub / QR をここに 〕 <span class="todo">差し替え</span>
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- reveal.js 本体＋プラグイン（CDN） -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      transition: "slide",
+      transitionSpeed: "default",
+      backgroundTransition: "fade",
+      controls: true,
+      progress: true,
+      center: true,
+      plugins: [RevealNotes],
+    });
+  </script>
+</body>
+</html>
