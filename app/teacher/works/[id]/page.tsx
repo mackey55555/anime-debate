@@ -17,6 +17,7 @@ export default function TeacherWork({
   const [adding, setAdding] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
   const [reordering, setReordering] = useState(false);
+  const [deleting, setDeleting] = useState<string | null>(null);
   const [tab, setTab] = useState<"scenes" | "submissions">("scenes");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loadingSubs, setLoadingSubs] = useState(false);
@@ -104,6 +105,19 @@ export default function TeacherWork({
     } finally {
       setGenerating(null);
     }
+  };
+
+  const deleteScene = async (scene: Scene) => {
+    if (!window.confirm("このシーンを本当に削除しますか？")) return;
+    setDeleting(scene.id);
+    const { error } = await supabase.from("scenes").delete().eq("id", scene.id);
+    setDeleting(null);
+    if (error) {
+      console.error(error);
+      alert("シーンの削除に失敗しました");
+      return;
+    }
+    await load();
   };
 
   const loadSubmissions = async () => {
@@ -242,6 +256,14 @@ export default function TeacherWork({
                     aria-label="下へ"
                   >
                     ↓
+                  </button>
+                  <button
+                    onClick={() => deleteScene(s)}
+                    disabled={deleting === s.id}
+                    className="w-9 h-9 grid place-items-center bg-red-100 hover:bg-red-200 text-red-600 rounded-lg text-lg font-bold transition active:scale-90 disabled:opacity-30"
+                    aria-label="削除"
+                  >
+                    ×
                   </button>
                 </div>
               </div>
