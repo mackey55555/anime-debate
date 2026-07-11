@@ -3,14 +3,23 @@
 import Link from "next/link";
 import { useMode } from "./ModeContext";
 
-export default function Header() {
+export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { mode, setMode } = useMode();
 
   return (
     <header className="bg-indigo-600 text-white px-4 py-3 flex items-center justify-between shadow">
-      <Link href="/" className="text-xl font-bold">
-        🎬 アニメ考察ひろば
-      </Link>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onMenuClick}
+          className="text-2xl px-2 py-1 rounded-lg hover:bg-indigo-500"
+          aria-label="メニューをひらく"
+        >
+          ☰
+        </button>
+        <Link href="/" className="text-xl font-bold">
+          🎬 アニメ考察ひろば
+        </Link>
+      </div>
       <div className="flex gap-2">
         <button
           onClick={() => setMode("teacher")}

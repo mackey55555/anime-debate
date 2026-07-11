@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ModeProvider } from "@/components/ModeContext";
-import Header from "@/components/Header";
+import Shell from "@/components/Shell";
 
 export const metadata: Metadata = {
   title: "アニメ考察ひろば",
@@ -17,8 +17,7 @@ export default function RootLayout({
     <html lang="ja">
       <body>
         <ModeProvider>
-          <Header />
-          <main className="max-w-3xl mx-auto p-4">{children}</main>
+          <Shell>{children}</Shell>
         </ModeProvider>
       </body>
     </html>
