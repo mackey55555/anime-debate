@@ -4,6 +4,7 @@ import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useMode } from "@/components/ModeContext";
+import Chat from "@/components/Chat";
 import type { Work, Scene, SceneNote } from "@/lib/types";
 
 export default function StudentWork({
@@ -195,6 +196,9 @@ export default function StudentWork({
           )}
         </div>
       </div>
+
+      {/* AIチャット */}
+      <Chat workId={id} sceneId={current?.id ?? null} studentName={studentName} />
 
       {/* 感想文へ（提出はステップ6で実装） */}
       <div className="mt-6 text-center">
