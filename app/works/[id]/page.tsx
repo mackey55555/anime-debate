@@ -24,6 +24,9 @@ export default function StudentWork({
   const [noteId, setNoteId] = useState<string | null>(null);
   const [savingNote, setSavingNote] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
+  const [otherNotes, setOtherNotes] = useState<SceneNote[]>([]);
+  const [loadingOtherNotes, setLoadingOtherNotes] = useState(true);
+  const [showOtherNotes, setShowOtherNotes] = useState(false);
 
   // 作品とシーンを読み込む
   useEffect(() => {
@@ -60,6 +63,31 @@ export default function StudentWork({
       const n = data as SceneNote | null;
       setNote(n?.body ?? "");
       setNoteId(n?.id ?? null);
+    })();
+  }, [current?.id, studentName]);
+
+  // このシーンの他の生徒の考えを読み込む
+  useEffect(() => {
+    if (!current?.id) {
+      setOtherNotes([]);
+      setLoadingOtherNotes(false);
+      return;
+    }
+    (async () => {
+      setLoadingOtherNotes(true);
+      const { data, error } = await supabase
+        .from("scene_notes")
+        .select("*")
+        .eq("scene_id", current.id)
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("他の生徒の考え取得エラー:", error.message, error);
+        setOtherNotes([]);
+      } else {
+        const notes = (data as SceneNote[]) ?? [];
+        setOtherNotes(notes.filter((note) => note.student_name !== studentName));
+      }
+      setLoadingOtherNotes(false);
     })();
   }, [current?.id, studentName]);
 
@@ -192,12 +220,20 @@ export default function StudentWork({
 
       {/* シーンメモ */}
       <div className="card p-5 mt-4">
-        <h2 className="section-title mb-3">✏️ このシーンで かんがえたこと</h2>
+        <div className="flex items-start justify-between gap-3">
+          <h2 className="section-title">✏️ このシーンで かんがえたこと</h2>
+          <button
+            onClick={() => setShowOtherNotes((v) => !v)}
+            className="btn-ghost px-4 py-2 text-sm shrink-0"
+          >
+            {showOtherNotes ? "とじる" : "ほかの生徒の考え"}
+          </button>
+        </div>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
           rows={4}
-          className="input"
+          className="input mt-3"
           placeholder="どうしてこうなったのかな？ どんな気もちかな？"
         />
         <div className="flex items-center gap-3 mt-3">
@@ -212,6 +248,37 @@ export default function StudentWork({
             <span className="text-emerald-600 font-bold">ほぞんしたよ！</span>
           )}
         </div>
+
+        {showOtherNotes && (
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <h3 className="font-bold text-slate-700 mb-3">
+              🌈 ほかの生徒がこのシーンで かんがえたこと
+            </h3>
+            {loadingOtherNotes ? (
+              <p className="text-slate-500">よみこみ中…</p>
+            ) : otherNotes.length === 0 ? (
+              <p className="text-slate-500">
+                まだほかの生徒の考えはありません。
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {otherNotes.map((noteItem) => (
+                  <div
+                    key={noteItem.id}
+                    className="rounded-2xl border border-slate-200 bg-white p-3"
+                  >
+                    <p className="font-bold text-slate-700">
+                      🎒 {noteItem.student_name}
+                    </p>
+                    <p className="mt-2 text-slate-600 leading-relaxed whitespace-pre-wrap">
+                      {noteItem.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* AIチャット */}

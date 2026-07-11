@@ -1,10 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMode } from "./ModeContext";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { mode, setMode } = useMode();
+  const router = useRouter();
+
+  const handleModeChange = (nextMode: "teacher" | "student") => {
+    setMode(nextMode);
+    router.push("/");
+  };
 
   return (
     <header className="sticky top-0 z-30 bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 text-white shadow-lg shadow-indigo-500/20">
@@ -24,7 +31,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
 
         <div className="flex gap-1 bg-white/15 p-1 rounded-full backdrop-blur-sm">
           <button
-            onClick={() => setMode("teacher")}
+            onClick={() => handleModeChange("teacher")}
             className={`px-4 py-1.5 rounded-full text-base font-bold transition ${
               mode === "teacher"
                 ? "bg-white text-indigo-600 shadow"
@@ -34,7 +41,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             👨‍🏫 先生
           </button>
           <button
-            onClick={() => setMode("student")}
+            onClick={() => handleModeChange("student")}
             className={`px-4 py-1.5 rounded-full text-base font-bold transition ${
               mode === "student"
                 ? "bg-white text-indigo-600 shadow"
