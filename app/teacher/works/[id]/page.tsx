@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import type { Work, Scene } from "@/lib/types";
+import type { Work, Scene, Submission } from "@/lib/types";
 
 export default function TeacherWork({
   params,
@@ -16,6 +16,9 @@ export default function TeacherWork({
   const [dialogue, setDialogue] = useState("");
   const [adding, setAdding] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
+  const [tab, setTab] = useState<"scenes" | "submissions">("scenes");
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [loadingSubs, setLoadingSubs] = useState(false);
 
   const load = async () => {
     const [{ data: w }, { data: s }] = await Promise.all([
@@ -87,6 +90,24 @@ export default function TeacherWork({
     }
   };
 
+  const loadSubmissions = async () => {
+    setLoadingSubs(true);
+    try {
+      const res = await fetch(`/api/works/${id}/submissions`);
+      const json = await res.json();
+      setSubmissions(json.submissions ?? []);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingSubs(false);
+    }
+  };
+
+  const openSubmissions = () => {
+    setTab("submissions");
+    loadSubmissions();
+  };
+
   if (!work) return <p className="text-lg">よみこみ中…</p>;
 
   return (
@@ -97,6 +118,75 @@ export default function TeacherWork({
       )}
       <p className="text-sm text-gray-500 mt-1">画風: {work.style}</p>
 
+      {/* タブ */}
+      <div className="flex gap-2 mt-4 border-b-2 border-gray-200">
+        <button
+          onClick={() => setTab("scenes")}
+          className={`px-5 py-2 rounded-t-xl text-lg font-bold ${
+            tab === "scenes"
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-100 text-gray-600"
+          }`}
+        >
+          シーン編集
+        </button>
+        <button
+          onClick={openSubmissions}
+          className={`px-5 py-2 rounded-t-xl text-lg font-bold ${
+            tab === "submissions"
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-100 text-gray-600"
+          }`}
+        >
+          提出一覧
+        </button>
+      </div>
+
+      {tab === "submissions" ? (
+        <div className="mt-4">
+          {loadingSubs ? (
+            <p className="text-lg">よみこみ中…</p>
+          ) : submissions.length === 0 ? (
+            <p className="text-gray-600">まだ提出がありません。</p>
+          ) : (
+            <ul className="grid gap-3">
+              {submissions.map((sub) => (
+                <li key={sub.id} className="bg-white rounded-xl p-4 shadow">
+                  <div className="flex items-center justify-between">
+                    <div className="text-lg font-bold">
+                      🎒 {sub.student_name}
+                    </div>
+                    <div className="text-xl">
+                      {sub.ai_score
+                        ? "⭐".repeat(sub.ai_score) +
+                          "☆".repeat(5 - sub.ai_score)
+                        : "―"}
+                    </div>
+                  </div>
+                  {sub.ai_summary && (
+                    <p className="mt-2">
+                      <span className="text-sm text-gray-500">要約: </span>
+                      {sub.ai_summary}
+                    </p>
+                  )}
+                  {sub.ai_comment && (
+                    <p className="mt-1 text-gray-700 bg-yellow-50 rounded-lg p-2">
+                      {sub.ai_comment}
+                    </p>
+                  )}
+                  <details className="mt-2">
+                    <summary className="cursor-pointer text-indigo-600">
+                      感想文ぜんぶを見る
+                    </summary>
+                    <p className="mt-2 whitespace-pre-wrap">{sub.essay}</p>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : (
+      <>
       <h2 className="text-xl font-bold mt-6 mb-2">シーン一覧</h2>
       {scenes.length === 0 ? (
         <p className="text-gray-600">まだシーンがありません。</p>
@@ -176,6 +266,8 @@ export default function TeacherWork({
           {adding ? "追加中…" : "＋ シーンを追加"}
         </button>
       </form>
+      </>
+      )}
     </div>
   );
 }
