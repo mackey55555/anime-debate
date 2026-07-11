@@ -25,7 +25,7 @@ html {
   color: var(--c-ink);
   font-weight: 500;
   /* ベースを大きく（全体の文字サイズの基準） */
-  font-size: 32px;
+  font-size: 30px;
 }
 .reveal .slides {
   text-align: left;
@@ -122,7 +122,7 @@ html {
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(6px);
   border-radius: 28px;
-  padding: 34px 46px;
+  padding: 26px 42px;
   box-shadow: 0 20px 60px rgba(31, 35, 64, 0.25), inset 0 0 0 3px rgba(255,255,255,.6);
   border: 3px solid rgba(255,255,255,.8);
 }
@@ -144,7 +144,7 @@ html {
   filter: drop-shadow(3px 4px 0 rgba(255,255,255,.9)) drop-shadow(4px 6px 0 rgba(124,92,255,.35));
 }
 .reveal h2 {
-  font-size: 2.15em;
+  font-size: 1.95em;
   color: var(--c-violet);
   text-shadow: 2px 3px 0 #fff, 4px 5px 0 rgba(124,92,255,.18);
 }
@@ -160,7 +160,7 @@ html {
   padding: 6px 18px;
   border-radius: 999px;
   box-shadow: 0 6px 0 rgba(124,92,255,.35);
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   transform: rotate(-2deg);
 }
 
@@ -168,9 +168,9 @@ html {
 .reveal .slides ul { list-style: none; margin-left: 0; }
 .reveal .slides ul li {
   position: relative;
-  padding: 10px 0 10px 48px;
-  font-size: 1.32em;
-  line-height: 1.4;
+  padding: 7px 0 7px 44px;
+  font-size: 1.18em;
+  line-height: 1.38;
 }
 .reveal .slides ul li::before {
   content: "🌻";
@@ -267,7 +267,7 @@ html {
 /* 役割カード */
 .rolecard {
   border-radius: 24px;
-  padding: 26px 28px;
+  padding: 20px 26px;
   color: #fff;
   box-shadow: 0 14px 30px rgba(0,0,0,.18);
 }
@@ -276,17 +276,19 @@ html {
 .rolecard h3 { color: #fff; font-size: 1.5em; }
 .rolecard ul li { color: #fff; }
 .rolecard ul li::before { content: "✨"; }
+/* 生徒カード（暖色背景）の強調文字は寒色系にして埋もれさせない */
+.rolecard.student strong { color: #0b2e6b; }
 
 /* フロー（横並びステップ） */
-.flow { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.flow { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
 .flow .step {
   flex: 1 1 0;
-  min-width: 140px;
+  min-width: 116px;
   background: #fff;
   border-radius: 18px;
-  padding: 18px 12px;
+  padding: 14px 10px;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.02em;
   font-weight: 700;
   box-shadow: 0 10px 22px rgba(0,0,0,.12);
   border-bottom: 6px solid var(--c-aqua);
@@ -295,24 +297,24 @@ html {
   font-family: var(--font-pop);
   color: #fff;
   background: linear-gradient(120deg, var(--c-pop), var(--c-violet));
-  width: 48px; height: 48px; line-height: 48px; border-radius: 50%;
-  font-size: 1.1em;
-  margin: 0 auto 10px;
+  width: 42px; height: 42px; line-height: 42px; border-radius: 50%;
+  font-size: 1.05em;
+  margin: 0 auto 8px;
 }
-.flow .arrow { align-self: center; font-size: 2em; color: var(--c-violet); }
+.flow .arrow { align-self: center; font-size: 1.5em; color: var(--c-violet); }
 
 /* ---------- 自作イラスト / 図 ---------- */
 .art { width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 18px rgba(0,0,0,.15)); }
-.archi { width: 100%; height: auto; display: block; }
+.archi { width: 100%; height: auto; max-height: 260px; display: block; margin: 0 auto; }
 .archi text { font-family: var(--font-body); font-weight: 700; }
 
 /* 技術スタックのバッジ */
-.stack { display: flex; flex-wrap: wrap; gap: 12px; }
+.stack { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
   font-family: var(--font-pop);
   background: #fff;
   border-radius: 999px;
-  padding: 10px 20px;
+  padding: 8px 18px;
   box-shadow: 0 8px 0 rgba(124,92,255,.25);
   border: 2px solid rgba(124,92,255,.25);
 }
