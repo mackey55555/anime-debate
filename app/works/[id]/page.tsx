@@ -94,20 +94,26 @@ export default function StudentWork({
   // 名前がまだなら名前入力画面
   if (!studentName) {
     return (
-      <div className="max-w-md mx-auto mt-8 bg-white rounded-2xl p-6 shadow text-center">
-        <h1 className="text-2xl font-bold mb-2">🎒 なまえを おしえてね</h1>
-        <p className="text-gray-600 mb-4">
+      <div className="max-w-md mx-auto mt-10 card p-8 text-center">
+        <div className="text-5xl mb-2">🎒</div>
+        <h1 className="text-2xl font-black mb-2">なまえを おしえてね</h1>
+        <p className="text-slate-500 mb-5">
           きみのメモやチャットを ほぞんするために つかうよ。
         </p>
         <input
           value={nameInput}
           onChange={(e) => setNameInput(e.target.value)}
-          className="border-2 border-indigo-200 rounded-xl p-3 text-lg w-full text-center"
+          onKeyDown={(e) =>
+            e.key === "Enter" &&
+            nameInput.trim() &&
+            setStudentName(nameInput.trim())
+          }
+          className="input text-center"
           placeholder="なまえ"
         />
         <button
           onClick={() => nameInput.trim() && setStudentName(nameInput.trim())}
-          className="mt-4 bg-indigo-600 text-white px-6 py-3 rounded-xl text-lg font-bold w-full"
+          className="btn-primary px-6 py-3 text-lg w-full mt-4"
         >
           はじめる
         </button>
@@ -115,41 +121,54 @@ export default function StudentWork({
     );
   }
 
-  if (!work) return <p className="text-lg">よみこみ中…</p>;
+  if (!work) return <p className="text-lg text-slate-500">よみこみ中…</p>;
 
   if (scenes.length === 0)
     return (
       <div>
-        <h1 className="text-2xl font-bold">{work.title}</h1>
-        <p className="text-gray-600 mt-4">まだシーンがありません。</p>
+        <h1 className="text-3xl font-black tracking-tight">{work.title}</h1>
+        <div className="card p-10 text-center mt-4">
+          <div className="text-5xl mb-3">🖼️</div>
+          <p className="text-slate-500">まだシーンがありません。</p>
+        </div>
       </div>
     );
 
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{work.title}</h1>
-        <span className="text-lg font-bold text-indigo-600">
+        <h1 className="text-3xl font-black tracking-tight">{work.title}</h1>
+        <span className="text-base font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">
           {index + 1} / {scenes.length}
         </span>
       </div>
 
+      {/* 進捗バー */}
+      <div className="h-1.5 bg-slate-200 rounded-full mt-3 overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-300"
+          style={{ width: `${((index + 1) / scenes.length) * 100}%` }}
+        />
+      </div>
+
       {/* 紙芝居ビューア */}
-      <div className="bg-white rounded-2xl p-4 shadow mt-3">
+      <div className="card p-4 mt-3">
         {current.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={current.image_url}
             alt=""
-            className="rounded-xl w-full object-contain max-h-[60vh] bg-gray-100"
+            className="rounded-2xl w-full object-contain max-h-[60vh] bg-slate-100"
           />
         ) : (
-          <div className="rounded-xl w-full h-64 bg-gray-100 flex items-center justify-center text-gray-400 text-lg">
+          <div className="rounded-2xl w-full h-64 bg-slate-100 flex items-center justify-center text-slate-400 text-lg">
             （画像はまだありません）
           </div>
         )}
         {current.dialogue && (
-          <p className="text-xl mt-3 leading-relaxed">💬 {current.dialogue}</p>
+          <p className="text-xl mt-3 leading-relaxed bg-slate-50 rounded-2xl px-4 py-3">
+            💬 {current.dialogue}
+          </p>
         )}
       </div>
 
@@ -158,41 +177,39 @@ export default function StudentWork({
         <button
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
           disabled={index === 0}
-          className="flex-1 bg-gray-200 text-gray-800 px-4 py-4 rounded-xl text-xl font-bold disabled:opacity-40"
+          className="btn-ghost flex-1 px-4 py-4 text-xl disabled:opacity-40"
         >
           ◀ もどる
         </button>
         <button
           onClick={() => setIndex((i) => Math.min(scenes.length - 1, i + 1))}
           disabled={index === scenes.length - 1}
-          className="flex-1 bg-indigo-600 text-white px-4 py-4 rounded-xl text-xl font-bold disabled:opacity-40"
+          className="btn-primary flex-1 px-4 py-4 text-xl disabled:opacity-40"
         >
           つぎへ ▶
         </button>
       </div>
 
       {/* シーンメモ */}
-      <div className="bg-white rounded-2xl p-4 shadow mt-4">
-        <h2 className="text-lg font-bold mb-2">
-          ✏️ このシーンで かんがえたこと
-        </h2>
+      <div className="card p-5 mt-4">
+        <h2 className="section-title mb-3">✏️ このシーンで かんがえたこと</h2>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
           rows={4}
-          className="border-2 border-indigo-200 rounded-xl p-3 text-lg w-full"
+          className="input"
           placeholder="どうしてこうなったのかな？ どんな気もちかな？"
         />
-        <div className="flex items-center gap-3 mt-2">
+        <div className="flex items-center gap-3 mt-3">
           <button
             onClick={saveNote}
             disabled={savingNote}
-            className="bg-green-600 text-white px-6 py-3 rounded-xl text-lg font-bold disabled:opacity-50"
+            className="btn-success px-6 py-3 text-lg"
           >
             {savingNote ? "ほぞん中…" : "メモをほぞん"}
           </button>
           {savedFlash && (
-            <span className="text-green-600 font-bold">ほぞんしたよ！</span>
+            <span className="text-emerald-600 font-bold">ほぞんしたよ！</span>
           )}
         </div>
       </div>
@@ -200,12 +217,9 @@ export default function StudentWork({
       {/* AIチャット */}
       <Chat workId={id} sceneId={current?.id ?? null} studentName={studentName} />
 
-      {/* 感想文へ（提出はステップ6で実装） */}
+      {/* 感想文へ */}
       <div className="mt-6 text-center">
-        <Link
-          href={`/works/${id}/submit`}
-          className="inline-block bg-pink-500 text-white px-6 py-4 rounded-xl text-xl font-bold"
-        >
+        <Link href={`/works/${id}/submit`} className="btn-accent px-8 py-4 text-xl">
           📝 感想文をかく
         </Link>
       </div>

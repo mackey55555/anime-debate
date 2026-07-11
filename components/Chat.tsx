@@ -77,28 +77,30 @@ export default function Chat({
   };
 
   return (
-    <div className="bg-white rounded-2xl p-4 shadow mt-4">
-      <h2 className="text-lg font-bold mb-2">🤖 先生ロボと はなす</h2>
-      <div className="grid gap-2 max-h-80 overflow-y-auto mb-3">
+    <div className="card p-5 mt-4">
+      <h2 className="section-title mb-3 flex items-center gap-2">
+        🤖 先生ロボと はなす
+      </h2>
+      <div className="grid gap-2.5 max-h-80 overflow-y-auto mb-3 pr-1">
         {turns.length === 0 && (
-          <p className="text-gray-500">
+          <p className="text-slate-400 text-center py-6">
             きになったこと、なんでも きいてみよう！
           </p>
         )}
         {turns.map((t, i) => (
           <div
             key={i}
-            className={`px-3 py-2 rounded-2xl text-lg max-w-[85%] ${
+            className={`px-4 py-2.5 rounded-2xl text-lg max-w-[85%] leading-relaxed ${
               t.role === "user"
-                ? "bg-indigo-600 text-white justify-self-end"
-                : "bg-gray-100 text-gray-900 justify-self-start"
+                ? "bg-gradient-to-br from-indigo-600 to-violet-600 text-white justify-self-end rounded-br-md shadow-sm"
+                : "bg-slate-100 text-slate-800 justify-self-start rounded-bl-md"
             }`}
           >
             {t.content}
           </div>
         ))}
         {sending && (
-          <div className="bg-gray-100 text-gray-500 px-3 py-2 rounded-2xl justify-self-start">
+          <div className="bg-slate-100 text-slate-400 px-4 py-2.5 rounded-2xl rounded-bl-md justify-self-start">
             考え中…
           </div>
         )}
@@ -109,14 +111,10 @@ export default function Chat({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
-          className="flex-1 border-2 border-indigo-200 rounded-xl p-3 text-lg"
+          className="input flex-1"
           placeholder="しつもんを かいてね"
         />
-        <button
-          onClick={send}
-          disabled={sending}
-          className="bg-indigo-600 text-white px-5 py-3 rounded-xl text-lg font-bold disabled:opacity-50"
-        >
+        <button onClick={send} disabled={sending} className="btn-primary px-5 py-3 text-lg">
           そうしん
         </button>
       </div>

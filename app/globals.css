@@ -2,7 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #f5f5ff;
-  color: #1a1a2e;
+@layer base {
+  body {
+    @apply text-slate-800 antialiased;
+    background:
+      radial-gradient(1200px 600px at 100% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
+      radial-gradient(1000px 500px at -10% 10%, rgba(99, 102, 241, 0.12), transparent 55%),
+      linear-gradient(180deg, #f7f8ff 0%, #f3f4fb 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* カード */
+  .card {
+    @apply bg-white rounded-3xl ring-1 ring-slate-200/70 shadow-sm;
+  }
+  .card-hover {
+    @apply transition duration-200 hover:shadow-lg hover:-translate-y-0.5 hover:ring-indigo-200;
+  }
+
+  /* ボタン共通 */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition-all duration-150 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn text-white shadow-md shadow-indigo-500/20;
+    background-image: linear-gradient(135deg, #6366f1, #8b5cf6);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+  }
+  .btn-accent {
+    @apply btn text-white shadow-md shadow-pink-500/20;
+    background-image: linear-gradient(135deg, #ec4899, #f43f5e);
+  }
+  .btn-accent:hover {
+    filter: brightness(1.06);
+  }
+  .btn-success {
+    @apply btn text-white shadow-md shadow-emerald-500/20;
+    background-image: linear-gradient(135deg, #10b981, #059669);
+  }
+  .btn-success:hover {
+    filter: brightness(1.06);
+  }
+  .btn-ghost {
+    @apply btn bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50;
+  }
+
+  /* 入力欄 */
+  .input {
+    @apply w-full rounded-2xl border-2 border-slate-200 bg-white/80 px-4 py-3 text-lg outline-none transition;
+  }
+  .input:focus {
+    @apply border-indigo-400 ring-4 ring-indigo-100;
+  }
+
+  /* セクション見出し */
+  .section-title {
+    @apply text-xl font-bold text-slate-800;
+  }
 }

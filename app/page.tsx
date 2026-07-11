@@ -25,24 +25,31 @@ export default function Home() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">作品いちらん</h1>
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h1 className="text-3xl font-black tracking-tight">作品いちらん</h1>
+          <p className="text-slate-500 mt-1">
+            {mode === "teacher"
+              ? "作品を作って、みんなに紙芝居をとどけよう。"
+              : "見たい作品をえらんでね。"}
+          </p>
+        </div>
         {mode === "teacher" && (
-          <Link
-            href="/teacher/works/new"
-            className="bg-green-600 text-white px-5 py-3 rounded-xl text-lg font-bold"
-          >
+          <Link href="/teacher/works/new" className="btn-success px-5 py-3 text-lg">
             ＋ 作品をつくる
           </Link>
         )}
       </div>
 
       {loading ? (
-        <p className="text-lg">よみこみ中…</p>
+        <p className="text-lg text-slate-500">よみこみ中…</p>
       ) : works.length === 0 ? (
-        <p className="text-lg text-gray-600">まだ作品がありません。</p>
+        <div className="card p-10 text-center">
+          <div className="text-5xl mb-3">🎬</div>
+          <p className="text-lg text-slate-500">まだ作品がありません。</p>
+        </div>
       ) : (
-        <ul className="grid gap-3">
+        <ul className="grid gap-4 sm:grid-cols-2">
           {works.map((w) => (
             <li key={w.id}>
               <Link
@@ -51,12 +58,23 @@ export default function Home() {
                     ? `/teacher/works/${w.id}`
                     : `/works/${w.id}`
                 }
-                className="block bg-white rounded-xl p-4 shadow hover:shadow-md"
+                className="card card-hover p-5 h-full flex flex-col group"
               >
-                <div className="text-xl font-bold">{w.title}</div>
-                {w.description && (
-                  <div className="text-gray-600 mt-1">{w.description}</div>
-                )}
+                <div className="flex items-start gap-3">
+                  <div className="text-3xl w-12 h-12 shrink-0 grid place-items-center rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-100">
+                    🎞️
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xl font-bold text-slate-800 group-hover:text-indigo-600 transition">
+                      {w.title}
+                    </div>
+                    {w.description && (
+                      <div className="text-slate-500 mt-1 line-clamp-2">
+                        {w.description}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </Link>
             </li>
           ))}

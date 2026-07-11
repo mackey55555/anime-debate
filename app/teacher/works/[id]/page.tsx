@@ -124,34 +124,36 @@ export default function TeacherWork({
     loadSubmissions();
   };
 
-  if (!work) return <p className="text-lg">よみこみ中…</p>;
+  if (!work) return <p className="text-lg text-slate-500">よみこみ中…</p>;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">{work.title}</h1>
+      <h1 className="text-3xl font-black tracking-tight">{work.title}</h1>
       {work.description && (
-        <p className="text-gray-600 mt-1">{work.description}</p>
+        <p className="text-slate-500 mt-1">{work.description}</p>
       )}
-      <p className="text-sm text-gray-500 mt-1">画風: {work.style}</p>
+      <p className="text-sm text-slate-400 mt-1">
+        画風: <span className="font-bold text-slate-500">{work.style}</span>
+      </p>
 
       {/* タブ */}
-      <div className="flex gap-2 mt-4 border-b-2 border-gray-200">
+      <div className="flex gap-1.5 mt-5 p-1 bg-slate-100 rounded-2xl w-fit">
         <button
           onClick={() => setTab("scenes")}
-          className={`px-5 py-2 rounded-t-xl text-lg font-bold ${
+          className={`px-5 py-2 rounded-xl text-lg font-bold transition ${
             tab === "scenes"
-              ? "bg-indigo-600 text-white"
-              : "bg-gray-100 text-gray-600"
+              ? "bg-white text-indigo-600 shadow-sm"
+              : "text-slate-500 hover:text-slate-700"
           }`}
         >
           シーン編集
         </button>
         <button
           onClick={openSubmissions}
-          className={`px-5 py-2 rounded-t-xl text-lg font-bold ${
+          className={`px-5 py-2 rounded-xl text-lg font-bold transition ${
             tab === "submissions"
-              ? "bg-indigo-600 text-white"
-              : "bg-gray-100 text-gray-600"
+              ? "bg-white text-indigo-600 shadow-sm"
+              : "text-slate-500 hover:text-slate-700"
           }`}
         >
           提出一覧
@@ -163,16 +165,19 @@ export default function TeacherWork({
           {loadingSubs ? (
             <p className="text-lg">よみこみ中…</p>
           ) : submissions.length === 0 ? (
-            <p className="text-gray-600">まだ提出がありません。</p>
+            <div className="card p-10 text-center">
+              <div className="text-5xl mb-3">📭</div>
+              <p className="text-slate-500">まだ提出がありません。</p>
+            </div>
           ) : (
             <ul className="grid gap-3">
               {submissions.map((sub) => (
-                <li key={sub.id} className="bg-white rounded-xl p-4 shadow">
+                <li key={sub.id} className="card p-5">
                   <div className="flex items-center justify-between">
                     <div className="text-lg font-bold">
                       🎒 {sub.student_name}
                     </div>
-                    <div className="text-xl">
+                    <div className="text-xl tracking-widest">
                       {sub.ai_score
                         ? "⭐".repeat(sub.ai_score) +
                           "☆".repeat(5 - sub.ai_score)
@@ -181,20 +186,24 @@ export default function TeacherWork({
                   </div>
                   {sub.ai_summary && (
                     <p className="mt-2">
-                      <span className="text-sm text-gray-500">要約: </span>
+                      <span className="text-sm text-slate-400 font-bold">
+                        要約:{" "}
+                      </span>
                       {sub.ai_summary}
                     </p>
                   )}
                   {sub.ai_comment && (
-                    <p className="mt-1 text-gray-700 bg-yellow-50 rounded-lg p-2">
+                    <p className="mt-2 text-slate-700 bg-gradient-to-br from-amber-50 to-yellow-50 ring-1 ring-amber-100 rounded-2xl p-3">
                       {sub.ai_comment}
                     </p>
                   )}
                   <details className="mt-2">
-                    <summary className="cursor-pointer text-indigo-600">
+                    <summary className="cursor-pointer text-indigo-600 font-bold">
                       感想文ぜんぶを見る
                     </summary>
-                    <p className="mt-2 whitespace-pre-wrap">{sub.essay}</p>
+                    <p className="mt-2 whitespace-pre-wrap text-slate-700">
+                      {sub.essay}
+                    </p>
                   </details>
                 </li>
               ))}
@@ -203,22 +212,25 @@ export default function TeacherWork({
         </div>
       ) : (
       <>
-      <h2 className="text-xl font-bold mt-6 mb-2">シーン一覧</h2>
+      <h2 className="section-title mt-6 mb-3">シーン一覧</h2>
       {scenes.length === 0 ? (
-        <p className="text-gray-600">まだシーンがありません。</p>
+        <div className="card p-10 text-center">
+          <div className="text-5xl mb-3">🎬</div>
+          <p className="text-slate-500">まだシーンがありません。</p>
+        </div>
       ) : (
         <ul className="grid gap-3">
           {scenes.map((s, i) => (
-            <li key={s.id} className="bg-white rounded-xl p-4 shadow">
+            <li key={s.id} className="card p-4">
               <div className="flex items-center justify-between">
-                <div className="font-bold text-indigo-600">
+                <div className="font-bold text-white text-sm px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500">
                   シーン {i + 1}
                 </div>
                 <div className="flex gap-1">
                   <button
                     onClick={() => moveScene(i, -1)}
                     disabled={reordering || i === 0}
-                    className="bg-gray-200 px-3 py-1 rounded-lg text-lg font-bold disabled:opacity-30"
+                    className="w-9 h-9 grid place-items-center bg-slate-100 hover:bg-slate-200 rounded-lg text-lg font-bold transition active:scale-90 disabled:opacity-30"
                     aria-label="上へ"
                   >
                     ↑
@@ -226,7 +238,7 @@ export default function TeacherWork({
                   <button
                     onClick={() => moveScene(i, 1)}
                     disabled={reordering || i === scenes.length - 1}
-                    className="bg-gray-200 px-3 py-1 rounded-lg text-lg font-bold disabled:opacity-30"
+                    className="w-9 h-9 grid place-items-center bg-slate-100 hover:bg-slate-200 rounded-lg text-lg font-bold transition active:scale-90 disabled:opacity-30"
                     aria-label="下へ"
                   >
                     ↓
@@ -237,29 +249,33 @@ export default function TeacherWork({
                 <img
                   src={s.image_url}
                   alt=""
-                  className="rounded-lg mt-2 max-h-64"
+                  className="rounded-2xl mt-3 max-h-64 w-full object-cover"
                 />
               ) : (
-                <div className="text-sm text-gray-400 mt-1">
+                <div className="rounded-2xl mt-3 h-32 bg-slate-100 flex items-center justify-center text-sm text-slate-400">
                   （画像はまだありません）
                 </div>
               )}
               {s.prompt_text && (
-                <div className="mt-2">
-                  <span className="text-sm text-gray-500">絵の説明: </span>
+                <div className="mt-3">
+                  <span className="text-sm text-slate-400 font-bold">
+                    絵の説明:{" "}
+                  </span>
                   {s.prompt_text}
                 </div>
               )}
               {s.dialogue && (
                 <div className="mt-1">
-                  <span className="text-sm text-gray-500">セリフ: </span>
+                  <span className="text-sm text-slate-400 font-bold">
+                    セリフ:{" "}
+                  </span>
                   {s.dialogue}
                 </div>
               )}
               <button
                 onClick={() => generateImage(s)}
                 disabled={generating === s.id}
-                className="mt-3 bg-pink-500 text-white px-4 py-2 rounded-xl font-bold disabled:opacity-50"
+                className="btn-accent mt-3 px-4 py-2"
               >
                 {generating === s.id
                   ? "生成中…（30秒ほど）"
@@ -272,33 +288,29 @@ export default function TeacherWork({
         </ul>
       )}
 
-      <h2 className="text-xl font-bold mt-6 mb-2">シーンを追加</h2>
-      <form onSubmit={addScene} className="grid gap-3 bg-white rounded-xl p-4 shadow">
-        <label className="grid gap-1">
+      <h2 className="section-title mt-6 mb-3">シーンを追加</h2>
+      <form onSubmit={addScene} className="card p-5 grid gap-4">
+        <label className="grid gap-1.5">
           <span className="font-bold">絵の説明（プロンプト）</span>
           <textarea
             value={promptText}
             onChange={(e) => setPromptText(e.target.value)}
-            className="border-2 border-indigo-200 rounded-xl p-3 text-lg"
+            className="input"
             rows={2}
             placeholder="例: 森の中で光る木を見つける子ども"
           />
         </label>
-        <label className="grid gap-1">
+        <label className="grid gap-1.5">
           <span className="font-bold">セリフ</span>
           <textarea
             value={dialogue}
             onChange={(e) => setDialogue(e.target.value)}
-            className="border-2 border-indigo-200 rounded-xl p-3 text-lg"
+            className="input"
             rows={2}
             placeholder="例: あれ、なんだか光ってるよ！"
           />
         </label>
-        <button
-          type="submit"
-          disabled={adding}
-          className="bg-indigo-600 text-white px-6 py-3 rounded-xl text-lg font-bold disabled:opacity-50"
-        >
+        <button type="submit" disabled={adding} className="btn-primary px-6 py-3 text-lg">
           {adding ? "追加中…" : "＋ シーンを追加"}
         </button>
       </form>

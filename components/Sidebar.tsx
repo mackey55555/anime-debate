@@ -35,15 +35,15 @@ export default function Sidebar({
 
       {/* ドロワー本体 */}
       <aside
-        className={`fixed top-0 left-0 h-full w-72 max-w-[80%] bg-white shadow-xl z-50 transform transition-transform ${
+        className={`fixed top-0 left-0 h-full w-72 max-w-[80%] bg-white/95 backdrop-blur-xl shadow-2xl z-50 transform transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4 flex items-center justify-between border-b">
-          <span className="text-lg font-bold">メニュー</span>
+        <div className="px-5 py-4 flex items-center justify-between bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
+          <span className="text-lg font-black">メニュー</span>
           <button
             onClick={onClose}
-            className="text-2xl px-2 leading-none"
+            className="text-xl w-9 h-9 grid place-items-center rounded-lg hover:bg-white/15 active:scale-90 transition"
             aria-label="とじる"
           >
             ✕
@@ -56,10 +56,10 @@ export default function Sidebar({
               key={i.href}
               href={i.href}
               onClick={onClose}
-              className={`block px-4 py-3 rounded-xl text-lg font-bold ${
+              className={`block px-4 py-3 rounded-2xl text-lg font-bold transition ${
                 pathname === i.href
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                  ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/20"
+                  : "text-slate-700 hover:bg-slate-100"
               }`}
             >
               {i.label}
@@ -68,33 +68,35 @@ export default function Sidebar({
         </nav>
 
         {/* モード切替 */}
-        <div className="p-3 border-t mt-2">
-          <div className="text-sm text-gray-500 mb-2">モードをきりかえ</div>
+        <div className="p-4 mt-1 mx-3 rounded-2xl bg-slate-50 ring-1 ring-slate-200/70">
+          <div className="text-sm text-slate-500 mb-2 font-bold">
+            モードをきりかえ
+          </div>
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => setMode("teacher")}
-              className={`px-3 py-3 rounded-xl text-base font-bold ${
+              className={`px-3 py-3 rounded-xl text-base font-bold transition ${
                 mode === "teacher"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-700"
+                  ? "bg-white text-indigo-600 shadow ring-1 ring-indigo-200"
+                  : "text-slate-600 hover:bg-white/60"
               }`}
             >
               👨‍🏫 先生
             </button>
             <button
               onClick={() => setMode("student")}
-              className={`px-3 py-3 rounded-xl text-base font-bold ${
+              className={`px-3 py-3 rounded-xl text-base font-bold transition ${
                 mode === "student"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-100 text-gray-700"
+                  ? "bg-white text-indigo-600 shadow ring-1 ring-indigo-200"
+                  : "text-slate-600 hover:bg-white/60"
               }`}
             >
               🎒 生徒
             </button>
           </div>
           {mode === "student" && studentName && (
-            <div className="text-sm text-gray-500 mt-3">
-              なまえ: <span className="font-bold">{studentName}</span>
+            <div className="text-sm text-slate-500 mt-3">
+              なまえ: <span className="font-bold text-slate-700">{studentName}</span>
             </div>
           )}
         </div>

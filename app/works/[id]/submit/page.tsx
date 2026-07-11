@@ -58,7 +58,7 @@ export default function SubmitPage({
   if (!studentName)
     return (
       <p className="text-lg">
-        さきに <Link href={`/works/${id}`} className="text-indigo-600 underline">
+        さきに <Link href={`/works/${id}`} className="text-indigo-600 font-bold underline">
           こちら
         </Link>{" "}
         でなまえを 登録してね。
@@ -69,38 +69,37 @@ export default function SubmitPage({
   if (result)
     return (
       <div>
-        <h1 className="text-2xl font-bold mb-4">📝 ていしゅつ できたよ！</h1>
-        <div className="bg-white rounded-2xl p-5 shadow grid gap-4">
-          <div>
-            <div className="text-sm text-gray-500">せんせいの てん</div>
-            <div className="text-3xl">
+        <div className="text-center mb-5">
+          <div className="text-5xl mb-2">🎉</div>
+          <h1 className="text-3xl font-black tracking-tight">
+            ていしゅつ できたよ！
+          </h1>
+        </div>
+        <div className="card p-6 grid gap-5">
+          <div className="text-center">
+            <div className="text-sm text-slate-500 mb-1">せんせいの てん</div>
+            <div className="text-4xl tracking-widest">
               {result.score
                 ? "⭐".repeat(result.score) + "☆".repeat(5 - result.score)
                 : "―"}
             </div>
           </div>
           <div>
-            <div className="text-sm text-gray-500">ようやく</div>
+            <div className="text-sm text-slate-500 font-bold mb-1">ようやく</div>
             <p className="text-lg">{result.summary}</p>
           </div>
           <div>
-            <div className="text-sm text-gray-500">せんせいから</div>
-            <p className="text-lg leading-relaxed bg-yellow-50 rounded-xl p-3">
+            <div className="text-sm text-slate-500 font-bold mb-1">せんせいから</div>
+            <p className="text-lg leading-relaxed bg-gradient-to-br from-amber-50 to-yellow-50 ring-1 ring-amber-100 rounded-2xl p-4">
               {result.comment}
             </p>
           </div>
         </div>
         <div className="mt-6 flex gap-3">
-          <Link
-            href={`/works/${id}`}
-            className="bg-gray-200 px-5 py-3 rounded-xl text-lg font-bold"
-          >
+          <Link href={`/works/${id}`} className="btn-ghost px-5 py-3 text-lg">
             もどる
           </Link>
-          <Link
-            href="/"
-            className="bg-indigo-600 text-white px-5 py-3 rounded-xl text-lg font-bold"
-          >
+          <Link href="/" className="btn-primary px-5 py-3 text-lg">
             作品いちらんへ
           </Link>
         </div>
@@ -109,22 +108,26 @@ export default function SubmitPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">📝 かんそうぶんを かく</h1>
-      {work && <p className="text-gray-600 mt-1">「{work.title}」</p>}
-      <p className="text-gray-600 mt-2">
+      <h1 className="text-3xl font-black tracking-tight">
+        📝 かんそうぶんを かく
+      </h1>
+      {work && (
+        <p className="text-slate-500 mt-1 font-bold">「{work.title}」</p>
+      )}
+      <p className="text-slate-500 mt-2">
         すきなシーンや、かんがえたこと、かんじたことを かいてみよう。
       </p>
       <textarea
         value={essay}
         onChange={(e) => setEssay(e.target.value)}
         rows={10}
-        className="border-2 border-indigo-200 rounded-xl p-3 text-lg w-full mt-3"
+        className="input mt-3"
         placeholder="このアニメを見て…"
       />
       <button
         onClick={submit}
         disabled={sending || !essay.trim()}
-        className="mt-3 bg-pink-500 text-white px-6 py-4 rounded-xl text-xl font-bold disabled:opacity-50"
+        className="btn-accent px-6 py-4 text-xl mt-3"
       >
         {sending ? "せんせいが よんでいるよ…" : "ていしゅつする"}
       </button>

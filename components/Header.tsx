@@ -7,40 +7,43 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { mode, setMode } = useMode();
 
   return (
-    <header className="bg-indigo-600 text-white px-4 py-3 flex items-center justify-between shadow">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onMenuClick}
-          className="text-2xl px-2 py-1 rounded-lg hover:bg-indigo-500"
-          aria-label="メニューをひらく"
-        >
-          ☰
-        </button>
-        <Link href="/" className="text-xl font-bold">
-          🎬 アニメ考察ひろば
-        </Link>
-      </div>
-      <div className="flex gap-2">
-        <button
-          onClick={() => setMode("teacher")}
-          className={`px-4 py-2 rounded-full text-lg font-bold ${
-            mode === "teacher"
-              ? "bg-white text-indigo-600"
-              : "bg-indigo-500 text-white"
-          }`}
-        >
-          👨‍🏫 先生
-        </button>
-        <button
-          onClick={() => setMode("student")}
-          className={`px-4 py-2 rounded-full text-lg font-bold ${
-            mode === "student"
-              ? "bg-white text-indigo-600"
-              : "bg-indigo-500 text-white"
-          }`}
-        >
-          🎒 生徒
-        </button>
+    <header className="sticky top-0 z-30 bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 text-white shadow-lg shadow-indigo-500/20">
+      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onMenuClick}
+            className="text-2xl w-10 h-10 grid place-items-center rounded-xl hover:bg-white/15 active:scale-90 transition"
+            aria-label="メニューをひらく"
+          >
+            ☰
+          </button>
+          <Link href="/" className="text-xl font-black tracking-tight">
+            🎬 アニメ考察ひろば
+          </Link>
+        </div>
+
+        <div className="flex gap-1 bg-white/15 p-1 rounded-full backdrop-blur-sm">
+          <button
+            onClick={() => setMode("teacher")}
+            className={`px-4 py-1.5 rounded-full text-base font-bold transition ${
+              mode === "teacher"
+                ? "bg-white text-indigo-600 shadow"
+                : "text-white/90 hover:bg-white/10"
+            }`}
+          >
+            👨‍🏫 先生
+          </button>
+          <button
+            onClick={() => setMode("student")}
+            className={`px-4 py-1.5 rounded-full text-base font-bold transition ${
+              mode === "student"
+                ? "bg-white text-indigo-600 shadow"
+                : "text-white/90 hover:bg-white/10"
+            }`}
+          >
+            🎒 生徒
+          </button>
+        </div>
       </div>
     </header>
   );

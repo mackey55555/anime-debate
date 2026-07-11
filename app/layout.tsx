@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
+import { Zen_Maru_Gothic } from "next/font/google";
 import "./globals.css";
 import { ModeProvider } from "@/components/ModeContext";
 import Shell from "@/components/Shell";
+
+const zenMaru = Zen_Maru_Gothic({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "アニメ考察ひろば",
@@ -14,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={zenMaru.className}>
       <body>
         <ModeProvider>
           <Shell>{children}</Shell>
