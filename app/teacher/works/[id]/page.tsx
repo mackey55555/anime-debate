@@ -16,6 +16,7 @@ export default function TeacherWork({
   const [dialogue, setDialogue] = useState("");
   const [adding, setAdding] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
+  const [reordering, setReordering] = useState(false);
   const [tab, setTab] = useState<"scenes" | "submissions">("scenes");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loadingSubs, setLoadingSubs] = useState(false);
@@ -60,6 +61,21 @@ export default function TeacherWork({
     }
     setPromptText("");
     setDialogue("");
+    load();
+  };
+
+  // ↑↓で隣のシーンとsort_orderを入れ替える
+  const moveScene = async (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= scenes.length) return;
+    const a = scenes[i];
+    const b = scenes[j];
+    setReordering(true);
+    await Promise.all([
+      supabase.from("scenes").update({ sort_order: b.sort_order }).eq("id", a.id),
+      supabase.from("scenes").update({ sort_order: a.sort_order }).eq("id", b.id),
+    ]);
+    setReordering(false);
     load();
   };
 
@@ -194,8 +210,28 @@ export default function TeacherWork({
         <ul className="grid gap-3">
           {scenes.map((s, i) => (
             <li key={s.id} className="bg-white rounded-xl p-4 shadow">
-              <div className="font-bold text-indigo-600">
-                シーン {i + 1}
+              <div className="flex items-center justify-between">
+                <div className="font-bold text-indigo-600">
+                  シーン {i + 1}
+                </div>
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => moveScene(i, -1)}
+                    disabled={reordering || i === 0}
+                    className="bg-gray-200 px-3 py-1 rounded-lg text-lg font-bold disabled:opacity-30"
+                    aria-label="上へ"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    onClick={() => moveScene(i, 1)}
+                    disabled={reordering || i === scenes.length - 1}
+                    className="bg-gray-200 px-3 py-1 rounded-lg text-lg font-bold disabled:opacity-30"
+                    aria-label="下へ"
+                  >
+                    ↓
+                  </button>
+                </div>
               </div>
               {s.image_url ? (
                 <img
