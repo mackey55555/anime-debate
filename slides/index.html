@@ -74,10 +74,84 @@
               </ul>
               <p class="todo">キャッチコピー・想いをここに差し替え</p>
             </div>
-            <div class="imgslot fragment zoom-in">
-              🎨<br />コンセプトを表す夏の絵
-              <small>（例：麦わら帽子の子がタブレットでアニメを観る水彩画）</small>
-            </div>
+            <svg class="art fragment zoom-in" viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="夏の日、麦わら帽子の子どもがタブレットでアニメを観るイラスト">
+              <defs>
+                <linearGradient id="cSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#8fd3ff" /><stop offset="1" stop-color="#e3f4ff" />
+                </linearGradient>
+                <linearGradient id="cGrass" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#8ce06a" /><stop offset="1" stop-color="#4caf50" />
+                </linearGradient>
+                <linearGradient id="cScreen" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffd980" /><stop offset="1" stop-color="#ff8fb0" />
+                </linearGradient>
+                <radialGradient id="cSun" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stop-color="#fff3b0" /><stop offset="1" stop-color="#ffb638" />
+                </radialGradient>
+              </defs>
+              <rect x="0" y="0" width="560" height="380" rx="26" fill="url(#cSky)" />
+              <!-- 太陽 -->
+              <g transform="translate(475,78)">
+                <g stroke="#ffce54" stroke-width="7" stroke-linecap="round">
+                  <line x1="0" y1="-64" x2="0" y2="-50" /><line x1="45" y1="-45" x2="35" y2="-35" />
+                  <line x1="64" y1="0" x2="50" y2="0" /><line x1="45" y1="45" x2="35" y2="35" />
+                  <line x1="-45" y1="45" x2="-35" y2="35" /><line x1="-64" y1="0" x2="-50" y2="0" />
+                  <line x1="-45" y1="-45" x2="-35" y2="-35" />
+                </g>
+                <circle r="40" fill="url(#cSun)" />
+              </g>
+              <!-- 雲 -->
+              <g fill="#ffffff" opacity="0.95">
+                <ellipse cx="120" cy="70" rx="46" ry="22" /><ellipse cx="90" cy="80" rx="30" ry="18" /><ellipse cx="155" cy="82" rx="30" ry="16" />
+              </g>
+              <!-- 草の丘 -->
+              <path d="M0 300 Q 280 258 560 300 L560 380 L0 380 Z" fill="url(#cGrass)" />
+              <!-- 本のつみ木 -->
+              <g transform="translate(452,286)">
+                <rect x="0" y="24" width="86" height="18" rx="4" fill="#ff6b6b" />
+                <rect x="6" y="8" width="74" height="18" rx="4" fill="#4d96ff" />
+                <rect x="12" y="-8" width="62" height="18" rx="4" fill="#ffd93d" />
+              </g>
+              <!-- スイカ -->
+              <g transform="translate(96,318)">
+                <path d="M-42 0 A42 42 0 0 1 42 0 Z" fill="#3ea55a" />
+                <path d="M-34 0 A34 34 0 0 1 34 0 Z" fill="#fff" />
+                <path d="M-28 0 A28 28 0 0 1 28 0 Z" fill="#ff5d6c" />
+                <g fill="#3a2b1a"><circle cx="-12" cy="-8" r="2.4" /><circle cx="6" cy="-12" r="2.4" /><circle cx="16" cy="-4" r="2.4" /><circle cx="-2" cy="-4" r="2.4" /></g>
+              </g>
+              <!-- 子ども -->
+              <g transform="translate(232,150)">
+                <!-- 脚（あぐら） -->
+                <path d="M-58 150 Q 0 120 58 150 Q 40 172 0 168 Q -40 172 -58 150 Z" fill="#4f7bd6" />
+                <!-- 体 -->
+                <rect x="-34" y="86" width="68" height="74" rx="26" fill="#24c2b0" />
+                <!-- 腕 -->
+                <path d="M-30 108 Q -6 132 20 128" stroke="#ffd9b3" stroke-width="16" fill="none" stroke-linecap="round" />
+                <path d="M30 108 Q 12 132 -8 128" stroke="#ffd9b3" stroke-width="16" fill="none" stroke-linecap="round" />
+                <!-- 顔 -->
+                <circle cx="0" cy="58" r="27" fill="#ffe0c2" />
+                <circle cx="-9" cy="56" r="3.4" fill="#33223b" /><circle cx="9" cy="56" r="3.4" fill="#33223b" />
+                <path d="M-8 66 Q 0 72 8 66" stroke="#c76a4b" stroke-width="3" fill="none" stroke-linecap="round" />
+                <circle cx="-15" cy="63" r="4" fill="#ff9db0" opacity=".6" /><circle cx="15" cy="63" r="4" fill="#ff9db0" opacity=".6" />
+                <!-- 麦わら帽子 -->
+                <ellipse cx="0" cy="40" rx="50" ry="15" fill="#e3b357" />
+                <path d="M-30 40 Q 0 4 30 40 Z" fill="#f2c76b" />
+                <ellipse cx="0" cy="40" rx="30" ry="7" fill="#d9a544" opacity=".5" />
+                <!-- タブレット -->
+                <g transform="translate(18,120) rotate(-10)">
+                  <rect x="-58" y="-40" width="116" height="80" rx="12" fill="#2b2f4a" />
+                  <rect x="-50" y="-32" width="100" height="64" rx="7" fill="url(#cScreen)" />
+                  <path d="M-50 20 L-18 -6 L2 12 L26 -18 L50 6 L50 32 Z" fill="#6fcf97" opacity=".85" />
+                  <circle cx="30" cy="-14" r="8" fill="#fff3b0" />
+                  <path d="M-30 -18 l3 7 l7 1 l-5 5 l1 7 l-6 -3 l-6 3 l1 -7 l-5 -5 l7 -1 z" fill="#fff" />
+                </g>
+              </g>
+              <!-- キラキラ -->
+              <g fill="#fff">
+                <path d="M300 60 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z" />
+                <path d="M40 150 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z" />
+              </g>
+            </svg>
           </div>
         </div>
       </section>
@@ -102,7 +176,38 @@
               <li class="fragment fade-up">〔 課題の背景データ・実感 〕</li>
               <li class="fragment fade-up">〔 「何を書けばいいか分からない」問題 〕</li>
             </ul>
-            <div class="imgslot wide fragment fade-in">😢<br />困っている子のイラスト<small>（夏休みの宿題×感想文）</small></div>
+            <svg class="art fragment fade-in" viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="白紙の原稿用紙を前に困っている子どものイラスト">
+              <defs>
+                <linearGradient id="pBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4de" /><stop offset="1" stop-color="#ffe6c7" /></linearGradient>
+              </defs>
+              <rect x="0" y="0" width="460" height="320" rx="24" fill="url(#pBg)" />
+              <!-- 机 -->
+              <rect x="40" y="232" width="380" height="20" rx="8" fill="#d9a066" />
+              <!-- 原稿用紙（白紙） -->
+              <g transform="translate(250,150) rotate(-4)">
+                <rect x="0" y="0" width="150" height="92" rx="6" fill="#fff" stroke="#e3b7b0" stroke-width="3" />
+                <g stroke="#f0d3ce" stroke-width="2">
+                  <line x1="14" y1="20" x2="136" y2="20" /><line x1="14" y1="40" x2="136" y2="40" />
+                  <line x1="14" y1="60" x2="136" y2="60" /><line x1="14" y1="78" x2="90" y2="78" />
+                </g>
+                <text x="120" y="86" font-size="34" fill="#ff8fa8">？</text>
+              </g>
+              <!-- 鉛筆 -->
+              <g transform="translate(210,238) rotate(-32)"><rect x="0" y="-4" width="70" height="8" rx="2" fill="#ffcf4a" /><path d="M70 -4 L82 0 L70 4 Z" fill="#ffe0a3" /><path d="M78 -1.5 L82 0 L78 1.5 Z" fill="#5b4636" /></g>
+              <!-- 子ども -->
+              <g transform="translate(120,120)">
+                <rect x="-40" y="80" width="80" height="70" rx="24" fill="#ff8a5c" />
+                <circle cx="0" cy="46" r="34" fill="#ffe0c2" />
+                <path d="M-34 40 Q 0 -6 34 40 Q 20 24 0 26 Q -20 24 -34 40 Z" fill="#4b3b2f" />
+                <path d="M-12 44 l-8 -6 M12 44 l8 -6" stroke="#33223b" stroke-width="3" stroke-linecap="round" />
+                <ellipse cx="-11" cy="52" rx="3.4" ry="4" fill="#33223b" /><ellipse cx="11" cy="52" rx="3.4" ry="4" fill="#33223b" />
+                <path d="M-9 66 Q 0 60 9 66" stroke="#c76a4b" stroke-width="3" fill="none" stroke-linecap="round" />
+                <!-- 汗 -->
+                <path d="M30 34 q 7 12 0 18 q -7 -6 0 -18 z" fill="#7ec8ff" />
+              </g>
+              <!-- もやもや -->
+              <g fill="#b98" opacity=".7"><text x="176" y="70" font-size="26">💭</text></g>
+            </svg>
           </div>
         </div>
       </section>
@@ -174,25 +279,7 @@
       </section>
 
       <!-- ===================================================== -->
-      <!-- 6. 主要画面（スクショ差し込み枠） -->
-      <!-- ===================================================== -->
-      <section>
-        <div class="panel">
-          <span class="eyebrow">SCREENS ／ 主要画面</span>
-          <h2>実際の画面</h2>
-          <div class="cols tight" style="margin-top:14px;">
-            <div class="imgslot fragment zoom-in">🖥️<br>作品一覧 / 先生の作成画面<small>スクショを差し替え</small></div>
-            <div class="imgslot fragment zoom-in">📱<br>生徒の紙芝居ビューア<small>スクショを差し替え</small></div>
-          </div>
-          <div class="cols tight" style="margin-top:14px;">
-            <div class="imgslot fragment zoom-in">🤖<br>AIチャット画面<small>スクショを差し替え</small></div>
-            <div class="imgslot fragment zoom-in">📝<br>感想文の採点結果<small>スクショを差し替え</small></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================================================== -->
-      <!-- 7. ★ ライブデモ枠 ★ -->
+      <!-- 6. ★ ライブデモ枠 ★ -->
       <!-- ===================================================== -->
       <section data-transition="zoom" data-background-color="#101538">
         <div class="divider">
@@ -201,14 +288,10 @@
           <p style="color:#fff; font-size:1.4em; margin-top:28px; font-family:var(--font-pop);">
             アプリを動かしてみます
           </p>
-          <ul class="star" style="display:inline-block; text-align:left; color:#fff; margin-top:10px;">
+          <ul class="star" style="display:inline-block; text-align:left; color:#fff; margin-top:16px;">
             <li style="color:#fff;">先生モードで作品づくり → 🎨画像生成</li>
             <li style="color:#fff;">生徒モードで視聴 → メモ → チャット → 提出</li>
           </ul>
-          <p class="note" style="color:#c9cdf5; margin-top:18px;">
-            デモURL: <strong style="color:#fff;">http://localhost:3000</strong>
-            <span class="todo">当日の環境に差し替え</span>
-          </p>
         </div>
       </section>
 
@@ -227,13 +310,71 @@
             <span class="chip pink fragment pop">Claude (考察・採点)</span>
             <span class="chip pink fragment pop">OpenAI gpt-image-1 (画像生成)</span>
           </div>
-          <div class="cols" style="margin-top:24px;">
-            <ul>
-              <li class="fragment fade-up">AIキー処理は<strong>サーバーAPIに隔離</strong></li>
-              <li class="fragment fade-up">画像は生成→Storage→URLをDB保存</li>
-            </ul>
-            <div class="imgslot wide fragment fade-in">🗺️<br>アーキ図をここに<small>（構成図を差し替え）</small></div>
-          </div>
+          <ul style="margin-top:14px;">
+            <li class="fragment fade-up">AIキー処理は<strong>サーバーAPIに隔離</strong>（キーはブラウザに出さない）</li>
+            <li class="fragment fade-up">画像は 生成 → Storage 保存 → <strong>URLだけDBに記録</strong></li>
+          </ul>
+
+          <svg class="archi fragment fade-in" style="margin-top:20px;" viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="システム構成図">
+            <defs>
+              <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+                <path d="M0 0 L9 5 L0 10 z" fill="#7c5cff" />
+              </marker>
+              <linearGradient id="bNext" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef0ff" /><stop offset="1" stop-color="#e0e4ff" /></linearGradient>
+            </defs>
+
+            <!-- 接続線（先に描いて背面に） -->
+            <g fill="none" stroke="#7c5cff" stroke-width="3.5" marker-end="url(#ah)">
+              <line x1="188" y1="190" x2="250" y2="190" />
+              <line x1="690" y1="120" x2="770" y2="96" />
+              <line x1="690" y1="196" x2="770" y2="196" />
+              <line x1="690" y1="250" x2="770" y2="300" />
+            </g>
+            <line x1="250" y1="205" x2="188" y2="205" stroke="#24d3c4" stroke-width="3.5" marker-end="url(#ah)" fill="none" />
+
+            <!-- ユーザー -->
+            <g>
+              <rect x="24" y="140" width="164" height="110" rx="18" fill="#fff" stroke="#ff5da2" stroke-width="3" />
+              <text x="106" y="180" font-size="34" text-anchor="middle">👨‍🏫 🎒</text>
+              <text x="106" y="212" font-size="21" text-anchor="middle" fill="#1f2340">ブラウザ</text>
+              <text x="106" y="236" font-size="17" text-anchor="middle" fill="#6b6f92">先生 / 生徒</text>
+            </g>
+
+            <!-- Next.js コンテナ -->
+            <rect x="250" y="52" width="440" height="280" rx="22" fill="url(#bNext)" stroke="#7c5cff" stroke-width="3" />
+            <text x="470" y="86" font-size="23" text-anchor="middle" fill="#5a3ff0" font-family="'Mochiy Pop One'">Next.js（App Router）</text>
+            <!-- 画面 -->
+            <rect x="278" y="104" width="384" height="78" rx="14" fill="#fff" stroke="#c9cdf5" stroke-width="2.5" />
+            <text x="470" y="140" font-size="21" text-anchor="middle" fill="#1f2340">画面 (React ＋ Tailwind)</text>
+            <text x="470" y="166" font-size="16" text-anchor="middle" fill="#6b6f92">作品・シーン・メモの表示／編集</text>
+            <!-- API -->
+            <rect x="278" y="200" width="384" height="112" rx="14" fill="#fff" stroke="#c9cdf5" stroke-width="2.5" />
+            <text x="470" y="228" font-size="21" text-anchor="middle" fill="#1f2340">API ルート（サーバー）</text>
+            <text x="470" y="256" font-size="15.5" text-anchor="middle" fill="#6b6f92">/scenes/generate ・ /chat</text>
+            <text x="470" y="278" font-size="15.5" text-anchor="middle" fill="#6b6f92">/submissions ・ /works/[id]/submissions</text>
+
+            <!-- 外部AI・DB -->
+            <g>
+              <rect x="770" y="56" width="196" height="80" rx="16" fill="#fff" stroke="#10b981" stroke-width="3" />
+              <text x="868" y="90" font-size="20" text-anchor="middle" fill="#1f2340">OpenAI</text>
+              <text x="868" y="114" font-size="16" text-anchor="middle" fill="#6b6f92">gpt-image-1 / 画像生成</text>
+            </g>
+            <g>
+              <rect x="770" y="156" width="196" height="80" rx="16" fill="#fff" stroke="#ff8a3d" stroke-width="3" />
+              <text x="868" y="190" font-size="20" text-anchor="middle" fill="#1f2340">Claude</text>
+              <text x="868" y="214" font-size="16" text-anchor="middle" fill="#6b6f92">考察 / 要約・採点</text>
+            </g>
+            <g>
+              <rect x="770" y="262" width="196" height="92" rx="16" fill="#fff" stroke="#24d3c4" stroke-width="3" />
+              <text x="868" y="298" font-size="20" text-anchor="middle" fill="#1f2340">Supabase</text>
+              <text x="868" y="322" font-size="15.5" text-anchor="middle" fill="#6b6f92">Postgres ＋ Storage</text>
+            </g>
+
+            <!-- ラベル -->
+            <text x="726" y="86" font-size="14" text-anchor="middle" fill="#8a86b8" transform="rotate(-13 726 86)">画像</text>
+            <text x="730" y="188" font-size="14" text-anchor="middle" fill="#8a86b8">会話</text>
+            <text x="712" y="292" font-size="14" text-anchor="middle" fill="#8a86b8" transform="rotate(20 712 292)">保存/URL</text>
+          </svg>
         </div>
       </section>
 
@@ -267,11 +408,8 @@
         <div class="title-hero">
           <div class="speedlines"></div>
           <div class="maintitle" style="font-size:2.6em;">ありがとう<br>ございました！</div>
-          <p class="fragment fade-up" style="font-size:1.2em; margin-top:20px;">
+          <p class="fragment fade-up" style="font-size:1.3em; margin-top:24px;">
             🌻 この夏、子どもたちに「考えるたのしさ」を 🌻
-          </p>
-          <p class="fragment fade-up note" style="margin-top:16px;">
-            〔 連絡先 / GitHub / QR をここに 〕 <span class="todo">差し替え</span>
           </p>
         </div>
       </section>

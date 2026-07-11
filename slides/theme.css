@@ -24,6 +24,8 @@ html {
   font-family: var(--font-body);
   color: var(--c-ink);
   font-weight: 500;
+  /* ベースを大きく（全体の文字サイズの基準） */
+  font-size: 32px;
 }
 .reveal .slides {
   text-align: left;
@@ -117,10 +119,10 @@ html {
   padding: 8px 4px;
 }
 .panel {
-  background: rgba(255,255,255,0.82);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(6px);
   border-radius: 28px;
-  padding: 40px 52px;
+  padding: 34px 46px;
   box-shadow: 0 20px 60px rgba(31, 35, 64, 0.25), inset 0 0 0 3px rgba(255,255,255,.6);
   border: 3px solid rgba(255,255,255,.8);
 }
@@ -134,7 +136,7 @@ html {
   text-transform: none;
 }
 .reveal h1 {
-  font-size: 2.7em;
+  font-size: 2.9em;
   background: linear-gradient(120deg, var(--c-pop), var(--c-pop2) 55%, var(--c-aqua));
   -webkit-background-clip: text;
   background-clip: text;
@@ -142,17 +144,17 @@ html {
   filter: drop-shadow(3px 4px 0 rgba(255,255,255,.9)) drop-shadow(4px 6px 0 rgba(124,92,255,.35));
 }
 .reveal h2 {
-  font-size: 1.9em;
+  font-size: 2.15em;
   color: var(--c-violet);
   text-shadow: 2px 3px 0 #fff, 4px 5px 0 rgba(124,92,255,.18);
 }
-.reveal h3 { font-size: 1.3em; color: var(--c-ink); }
+.reveal h3 { font-size: 1.5em; color: var(--c-ink); }
 
 /* ラベル（章番号など） */
 .eyebrow {
   display: inline-block;
   font-family: var(--font-pop);
-  font-size: .7em;
+  font-size: .85em;
   color: #fff;
   background: linear-gradient(120deg, var(--c-pop), var(--c-violet));
   padding: 6px 18px;
@@ -166,8 +168,9 @@ html {
 .reveal .slides ul { list-style: none; margin-left: 0; }
 .reveal .slides ul li {
   position: relative;
-  padding: 8px 0 8px 44px;
-  font-size: 1.05em;
+  padding: 10px 0 10px 48px;
+  font-size: 1.32em;
+  line-height: 1.4;
 }
 .reveal .slides ul li::before {
   content: "🌻";
@@ -278,11 +281,13 @@ html {
 .flow { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
 .flow .step {
   flex: 1 1 0;
-  min-width: 130px;
+  min-width: 140px;
   background: #fff;
   border-radius: 18px;
-  padding: 16px 12px;
+  padding: 18px 12px;
   text-align: center;
+  font-size: 1.1em;
+  font-weight: 700;
   box-shadow: 0 10px 22px rgba(0,0,0,.12);
   border-bottom: 6px solid var(--c-aqua);
 }
@@ -290,10 +295,16 @@ html {
   font-family: var(--font-pop);
   color: #fff;
   background: linear-gradient(120deg, var(--c-pop), var(--c-violet));
-  width: 40px; height: 40px; line-height: 40px; border-radius: 50%;
-  margin: 0 auto 8px;
+  width: 48px; height: 48px; line-height: 48px; border-radius: 50%;
+  font-size: 1.1em;
+  margin: 0 auto 10px;
 }
-.flow .arrow { align-self: center; font-size: 1.6em; color: var(--c-violet); }
+.flow .arrow { align-self: center; font-size: 2em; color: var(--c-violet); }
+
+/* ---------- 自作イラスト / 図 ---------- */
+.art { width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 18px rgba(0,0,0,.15)); }
+.archi { width: 100%; height: auto; display: block; }
+.archi text { font-family: var(--font-body); font-weight: 700; }
 
 /* 技術スタックのバッジ */
 .stack { display: flex; flex-wrap: wrap; gap: 12px; }
